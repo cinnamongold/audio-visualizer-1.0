@@ -218,19 +218,6 @@ export default function Library({ onNavigate }: { onNavigate: (id: PageId, param
                         <button onClick={(e) => { e.stopPropagation(); playTrack(track); }} className="p-1.5 bg-white/20 hover:bg-white/40 rounded-full transition-colors">
                           <Play fill="white" size={12} className="text-white ml-0.5" />
                         </button>
-                        <button 
-                          onClick={(e) => { 
-                            e.stopPropagation(); 
-                            toggleShuffle();
-                            if (!isShuffle) {
-                              const randomTrack = tracks[Math.floor(Math.random() * tracks.length)];
-                              playTrack(randomTrack);
-                            }
-                          }} 
-                          className={`p-1.5 rounded-full transition-colors ${isShuffle ? 'bg-blue-500/40 text-blue-200' : 'bg-white/20 hover:bg-white/40 text-white'}`}
-                        >
-                          <Shuffle size={10} />
-                        </button>
                       </div>
                     </div>
                     <div className="flex-1 min-w-0">
