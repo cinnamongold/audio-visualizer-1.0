@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Debbreviation Lab</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Debbreviation Lab</h1>
+      <p class="subtitle">Converter + calculator for Debbreviation notation.</p>
+
+      <section class="panel">
+        <h2>Converter</h2>
+        <label for="convertInput">Natural / scientific input</label>
+        <input
+          id="convertInput"
+          type="text"
+          placeholder="Examples: 123456789, 1e300, 1e1e999"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button id="convertButton" type="button">Convert</button>
+
+        <div class="results">
+          <div><strong>Debbreviation:</strong> <code id="convertDeb">-</code></div>
+          <div><strong>Scientific:</strong> <code id="convertSci">-</code></div>
+          <div><strong>Round-trip:</strong> <code id="convertRound">-</code></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Calculator</h2>
+        <label for="calcInput">Expression</label>
+        <input
+          id="calcInput"
+          type="text"
+          placeholder="Examples: (1df + 2de) / 3, log(1e1e999), sin(pi/2)"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button id="calcButton" type="button">Evaluate</button>
+
+        <div class="help">
+          Operators: <code>+ - * / ^</code>
+          <br />
+          Functions: <code>log(x)</code>, <code>log(x, base)</code>, <code>ln</code>,
+          <code>sin</code>, <code>cos</code>, <code>tan</code>, <code>asin</code>,
+          <code>acos</code>, <code>atan</code>, <code>sqrt</code>, <code>abs</code>,
+          <code>exp</code>
+          <br />
+          Constants: <code>pi</code>, <code>tau</code>, <code>e</code>
+        </div>
+
+        <div class="results">
+          <div><strong>Debbreviation:</strong> <code id="calcDeb">-</code></div>
+          <div><strong>Scientific:</strong> <code id="calcSci">-</code></div>
+        </div>
+      </section>
+
+      <p id="status" class="status"></p>
+    </main>
+
+    <script src="./vendor/break_eternity.js"></script>
+    <script src="./debbreviation.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>
+

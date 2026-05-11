@@ -1,0 +1,17 @@
+{
+  "name": "chatterbox",
+  "version": "1.0.0",
+  "description": "A self-hostable chat app where the bot learns about you",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["chat", "bot", "nodejs", "websocket"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ws": "^8.14.2"
+  }
+}

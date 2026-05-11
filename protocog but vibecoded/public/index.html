@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatterBox</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>🤖 ChatterBox</h1>
+      <p class="subtitle">Your friendly neighborhood bot</p>
+    </header>
+
+    <!-- Main Chat Area -->
+    <main class="chat-container">
+      <div id="chat-log" class="chat-log"></div>
+      
+      <div class="input-area">
+        <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off">
+        <button id="send-btn">Send</button>
+      </div>
+    </main>
+
+    <!-- Sidebar with Bot Info -->
+    <aside class="sidebar">
+      <!-- Bot Settings -->
+      <section class="settings-panel">
+        <h2>⚙️ Bot Settings</h2>
+        
+        <div class="setting-group">
+          <label for="botness-slider">Botness Level</label>
+          <input type="range" id="botness-slider" min="0" max="2" value="1">
+          <div class="slider-labels">
+            <span>🤖 Robot</span>
+            <span>😐 Medium</span>
+            <span>👤 Human</span>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <label for="style-select">Bot Style</label>
+          <select id="style-select">
+            <option value="sarcastic">Sarcastic</option>
+            <option value="helpful">Helpful</option>
+            <option value="casual">Casual</option>
+            <option value="formal">Formal</option>
+          </select>
+        </div>
+
+        <div class="setting-group">
+          <label for="formality-select">Formality</label>
+          <select id="formality-select">
+            <option value="casual">Casual</option>
+            <option value="formal">Formal</option>
+            <option value="neutral">Neutral</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Learned Phrases Display -->
+      <section class="info-panel">
+        <h2>🧠 Learned Phrases</h2>
+        <div id="learned-phrases" class="info-content">
+          <p class="empty-state">Learning your style...</p>
+        </div>
+      </section>
+
+      <!-- Word Frequency Display -->
+      <section class="info-panel">
+        <h2>📊 Your Words</h2>
+        <div id="word-frequency" class="info-content">
+          <p class="empty-state">Collecting words...</p>
+        </div>
+      </section>
+
+      <!-- Style Learned Status -->
+      <section class="info-panel">
+        <h2>🎭 Style Status</h2>
+        <div id="style-status" class="info-content">
+          <span class="state-badge learning">Learning...</span>
+        </div>
+      </section>
+        <h2">🎭 Bot State</h2>
+        <div id="conversation-state" class="info-content">
+          <span class="state-badge">intro</span>
+        </div>
+      </section>
+
+      <!-- Message History -->
+      <section class="info-panel">
+        <h2">💬 History</h2>
+        <div id="message-history" class="info-content">
+          <p class="empty-state">No messages yet...</p>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

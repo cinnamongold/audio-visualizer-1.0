@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blank Slate Bot</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Neural chat toy</p>
+          <h1>Blank Slate Bot</h1>
+          <p class="subcopy">
+            A tiny personal chatbot that stores memory, learns response classes, and
+            improves through retraining instead of calling an LLM.
+          </p>
+        </div>
+        <div class="status-card">
+          <p class="status-label">Learning status</p>
+          <p id="training-status" class="status-value">Idle</p>
+          <div class="confidence-wrap">
+            <div class="confidence-head">
+              <span>Confidence</span>
+              <span id="confidence-label">0%</span>
+            </div>
+            <div class="confidence-bar">
+              <div id="confidence-fill" class="confidence-fill"></div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="chat-panel">
+          <div id="messages" class="messages"></div>
+
+          <form id="chat-form" class="composer">
+            <label for="message-input" class="sr-only">Message</label>
+            <textarea
+              id="message-input"
+              rows="3"
+              placeholder="Say hello, teach the bot your name, share preferences, or ask what it remembers."
+            ></textarea>
+            <div class="composer-row">
+              <button type="submit" id="send-button">Send</button>
+              <div class="control-row">
+                <button type="button" id="retrain-button">Retrain</button>
+                <button type="button" id="clear-memory-button">Clear Memory</button>
+                <button type="button" id="export-button">Export Data</button>
+                <label class="file-button" for="import-input">Import Data</label>
+                <input id="import-input" type="file" accept="application/json" hidden />
+              </div>
+            </div>
+            <label class="toggle-row" for="auto-train-toggle">
+              <input id="auto-train-toggle" type="checkbox" />
+              Training mode: queue background retraining after a few new examples
+            </label>
+          </form>
+        </section>
+
+        <aside class="sidebar">
+          <section class="card">
+            <h2>Memory Snapshot</h2>
+            <div id="memory-summary" class="memory-summary"></div>
+          </section>
+
+          <section class="card">
+            <h2>Dataset</h2>
+            <p id="dataset-stats" class="small-copy"></p>
+            <p id="last-train" class="small-copy"></p>
+          </section>
+
+          <section class="card">
+            <h2>Recent Learning</h2>
+            <div id="learning-log" class="learning-log"></div>
+          </section>
+
+          <section class="card">
+            <h2>Settings</h2>
+            <div class="settings-section">
+              <div class="setting-row">
+                <span class="setting-label">Dark Mode</span>
+                <div class="setting-control">
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="dark-mode-toggle" />
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <span class="setting-label">Font Family</span>
+                <div class="setting-control">
+                  <select id="font-select">
+                    <option value="IBM Plex Sans">IBM Plex Sans</option>
+                    <option value="Segoe UI">Segoe UI</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Courier New">Courier New</option>
+                  </select>
+                </div>
+              </div>
+              <div class="setting-row">
+                <span class="setting-label">Google Font</span>
+                <div class="setting-control">
+                  <input type="text" id="google-font-input" placeholder="e.g., Roboto" />
+                </div>
+              </div>
+            </div>
+            <div class="settings-section">
+              <h3>Custom Colors</h3>
+              <div class="color-picker-row">
+                <input type="color" id="color-bg-top" title="Background Top" />
+                <input type="color" id="color-bg-bottom" title="Background Bottom" />
+                <input type="color" id="color-accent" title="Accent" />
+                <input type="color" id="color-text" title="Text" />
+              </div>
+            </div>
+          </section>
+        </aside>
+      </main>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

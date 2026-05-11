@@ -1,0 +1,118 @@
+You are an expert full‑stack Node.js developer. I want you to generate a complete, runnable web app in a single response, using Node.js on the backend and a clean browser UI (no LLM, no external AI API).
+
+Project name: "ChatterBox"
+Goal: A simple, self‑hostable chat app where the bot talks to me in the browser. It should:
+- Remember facts about me (my interests, topics, etc.) and reuse them in future replies.
+- Talk like me. It should be somewhat similar to a markov chain in which it copies my writing style. It should not solely rely on that, if possible.
+- Persistent data: all user knowledge and conversation state must be saved to a file.
+  - By default, save to "./data.json".
+  - Optionally accept a command‑line argument (e.g., `node server.js --data-path=/path/to/mydata.json`) to override the path.
+- Not use any large language model (LLM) or generative‑AI API. No OpenAI, Anthropic, etc.
+- Use only deterministic / rule‑based logic and templates.
+- Feel conversational, but I should be able to control how "botty" it feels:
+  - Make the bot personality configurable via a config object (that can be changed via UI too) (e.g., `BOT_PERSONALITY = { style: "sarcastic", formality: "casual", botness: "high" }`).
+  - Interpret "botness" roughly as:
+    - "high": more obviously robotic, repetitive, simple grammar.
+    - "low": smoother, more varied, maybe even so human it's a little scary.
+- The bot should:
+  - Learn new topics from my messages and store them.
+  - Remember language preferences, hobbies, and moods.
+  - Use a finite‑state machine (or state string) to change style (helpful, chatty, debugging, etc.).
+
+Stack:
+- Backend: Node.js (express or a minimal server).
+- Frontend: Plain HTML + CSS + vanilla JavaScript (no React/Vue boilerplate).
+- Data: Store bot state and user knowledge in a JSON file (see above).
+
+Architecture:
+1. Server (Node.js)
+   - Create a simple HTTP server that serves:
+     - index.html
+     - style.css
+     - main.js
+   - Add a WebSocket or long‑polling endpoint for chat messages (pick one; explain your choice in comments).
+   - Implement a config section at the top with:
+     - `BOT_PERSONALITY` object (style, formality, botness level).
+   - Implement a persistence layer:
+     - On startup:
+       - Parse the data file (default "./data.json" or user‑provided path).
+       - If file doesn't exist, create an empty one with default schema.
+       - Populate:
+         - `knowledgeGraph` (topics and relations),
+         - `userMemory` (facts about me),
+         - `conversationState` (current state like "intro", "helping_with_code", "chill_chat").
+         - Important note: all of these info should be available to the user via the UI
+     - On every relevant change:
+       - Save the full state back to disk (overwriting the file).
+   - Implement a bot engine that:
+     - For each user message:
+       - Parses the message using simple regex / keyword patterns to detect:
+         - questions,
+         - statements about myself (e.g., "I like X", "I use Y"),
+         - requests for help.
+       - Updates `userMemory` and `knowledgeGraph` based on detected patterns.
+       - Uses the `BOT_PERSONALITY` config to adjust:
+         - how repetitive the replies are,
+         - how long sentences are,
+         - how much it rephrases vs. uses canned responses.
+       - Uses a “response template system”:
+         - A list of template objects per state, e.g.:
+           { triggers: ["like", "love"], templates: ["You seem to really like {topic}.", "Nice, {topic} is solid."] }
+         - These triggers do not have to be strictly respectful or "botty." They can match the user's charm and personality too.
+         - Templates can include placeholders like `{topic}`, `{language}`, which are filled from `userMemory`.
+         - For higher botness, prefer shorter, more generic templates; for lower botness, include more varied templates and longer sentences.
+       - Randomly picks one applicable template and returns it as the bot’s reply.
+   - Make sure the bot can:
+     - Learn new topics from my messages (store them in the knowledge graph).
+     - Remember language preferences, hobbies, and moods.
+     - Switch states (e.g., from "helping_with_code" to "chill_chat") and keep the new state in the persisted data.
+
+2. Frontend (Browser)
+   - index.html:
+     - A simple chat UI:
+       - A header with the bot’s name "ChatterBox".
+       - A chat log area (div) that shows messages.
+       - An input box + send button.
+       - The information stored in the JSONs as infographics.
+     - A small settings area (optional but nice‑to‑have):
+       - A slider or dropdown to set bot “botness” level (e.g., "very robotic" ↔ "less robotic").
+       - When changed, this sends the value to the backend and updates the `BOT_PERSONALITY.botness` in the config and in the saved file.
+   - style.css:
+     - A minimal, clean, modern look:
+       - Light background, dark text.
+       - Chat bubbles: mine on the right, bot on the left.
+       - Rounded corners, small padding, readable font.
+   - main.js:
+     - Connects to the backend WebSocket / endpoint.
+     - Handles:
+       - Sending my message.
+       - Receiving bot replies and appending them to the chat log.
+       - Sending the "botness" setting to the backend when changed.
+
+Coding rules:
+- Write all files in the same code block, separated by comments like:
+  // FILE: server.js
+  ...
+  // FILE: public/index.html
+  ...
+- Use clear comments explaining:
+  - How the bot’s personality and botness level affect template selection.
+  - How data is loaded from and saved to the JSON file.
+  - The state machine / bot state transitions.
+  - How patterns are matched.
+- Do NOT use third‑party NLP libraries or machine‑learning models.
+- Use Node fs / JSON to read and write the data file (no extra DB).
+
+Output format:
+- A single, complete response with:
+  - A server file (Node.js, handling command‑line args and persistence).
+  - public/index.html
+  - public/style.css
+  - public/main.js
+  - Note: you are coding this in realtime.
+- Include a brief README section at the top (as a comment) that tells me:
+  - How to run it (e.g., `npm init -y`, `npm install express`, `node server.js`).
+  - How to override the data path (e.g., `node server.js --data-path=./my-memory.json`).
+  - What URL to open in the browser (e.g., http://localhost:3000).
+
+Now, generate the full app according to this spec.

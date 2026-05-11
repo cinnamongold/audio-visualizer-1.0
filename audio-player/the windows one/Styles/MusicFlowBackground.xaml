@@ -1,0 +1,111 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DrawingBrush x:Key="MusicFlowBackgroundBrush"
+                  Stretch="Fill"
+                  Viewbox="0,0,1600,1000"
+                  ViewboxUnits="Absolute"
+                  Viewport="0,0,1,1"
+                  ViewportUnits="RelativeToBoundingBox">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Geometry="M0,0 H1600 V1000 H0 Z">
+                    <GeometryDrawing.Brush>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#07090A" Offset="0" />
+                            <GradientStop Color="#101416" Offset="0.42" />
+                            <GradientStop Color="#090707" Offset="1" />
+                        </LinearGradientBrush>
+                    </GeometryDrawing.Brush>
+                </GeometryDrawing>
+
+                <GeometryDrawing Geometry="M-120,670 C100,520 225,770 420,610 S770,420 980,565 S1290,720 1720,430">
+                    <GeometryDrawing.Pen>
+                        <Pen Thickness="28" StartLineCap="Round" EndLineCap="Round">
+                            <Pen.Brush>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#105EFFE8" Offset="0" />
+                                    <GradientStop Color="#55FEFFD7" Offset="0.28" />
+                                    <GradientStop Color="#55FF8FBE" Offset="0.58" />
+                                    <GradientStop Color="#0CF5F8FF" Offset="1" />
+                                </LinearGradientBrush>
+                            </Pen.Brush>
+                        </Pen>
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+
+                <GeometryDrawing Geometry="M-90,705 C150,555 320,835 525,660 S840,500 1045,630 S1350,805 1700,535">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#18FFFFFF" Thickness="4" StartLineCap="Round" EndLineCap="Round" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+
+                <GeometryDrawing Geometry="M-40,375 C180,230 390,420 610,300 S995,130 1175,320 S1390,500 1690,265">
+                    <GeometryDrawing.Pen>
+                        <Pen Thickness="18" StartLineCap="Round" EndLineCap="Round">
+                            <Pen.Brush>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#00FFFFFF" Offset="0" />
+                                    <GradientStop Color="#30A6FFE8" Offset="0.24" />
+                                    <GradientStop Color="#3BFFD76F" Offset="0.52" />
+                                    <GradientStop Color="#00FFFFFF" Offset="1" />
+                                </LinearGradientBrush>
+                            </Pen.Brush>
+                        </Pen>
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+
+                <GeometryDrawing Geometry="M80,775 C250,820 405,802 560,760 M700,805 C840,850 990,858 1160,820 M1210,188 C1320,235 1432,232 1540,182">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#22FFFFFF" Thickness="2.5" StartLineCap="Round" EndLineCap="Round">
+                            <Pen.DashStyle>
+                                <DashStyle Dashes="3,11" />
+                            </Pen.DashStyle>
+                        </Pen>
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+
+                <GeometryDrawing Geometry="M210,185 V335 M245,148 V372 M280,210 V320 M315,118 V405 M350,178 V348 M385,232 V300">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#30F8FFEF" Thickness="10" StartLineCap="Round" EndLineCap="Round" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+
+                <GeometryDrawing Geometry="M1185,605 V755 M1220,560 V805 M1255,640 V725 M1290,530 V835 M1325,590 V780 M1360,660 V715">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#2DFFC0D8" Thickness="10" StartLineCap="Round" EndLineCap="Round" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+
+                <GeometryDrawing Geometry="M725,130 C770,95 845,102 890,145 C935,188 928,258 882,298 C835,340 760,330 718,282 C678,237 681,164 725,130 Z">
+                    <GeometryDrawing.Brush>
+                        <RadialGradientBrush Center="0.35,0.22" GradientOrigin="0.25,0.12" RadiusX="0.8" RadiusY="0.8">
+                            <GradientStop Color="#36FFFFFF" Offset="0" />
+                            <GradientStop Color="#2298FFF2" Offset="0.38" />
+                            <GradientStop Color="#0056FFE0" Offset="1" />
+                        </RadialGradientBrush>
+                    </GeometryDrawing.Brush>
+                </GeometryDrawing>
+
+                <GeometryDrawing Geometry="M986,730 C1022,703 1084,708 1120,742 C1158,778 1152,835 1116,868 C1078,903 1015,893 982,852 C950,812 952,757 986,730 Z">
+                    <GeometryDrawing.Brush>
+                        <RadialGradientBrush Center="0.32,0.2" GradientOrigin="0.18,0.08" RadiusX="0.85" RadiusY="0.85">
+                            <GradientStop Color="#34FFFFFF" Offset="0" />
+                            <GradientStop Color="#25FF7FAF" Offset="0.42" />
+                            <GradientStop Color="#00FF7FAF" Offset="1" />
+                        </RadialGradientBrush>
+                    </GeometryDrawing.Brush>
+                </GeometryDrawing>
+
+                <GeometryDrawing Geometry="M0,0 H1600 V1000 H0 Z">
+                    <GeometryDrawing.Brush>
+                        <RadialGradientBrush Center="0.5,0.5" GradientOrigin="0.5,0.5" RadiusX="0.75" RadiusY="0.75">
+                            <GradientStop Color="#00000000" Offset="0" />
+                            <GradientStop Color="#16000000" Offset="0.65" />
+                            <GradientStop Color="#72000000" Offset="1" />
+                        </RadialGradientBrush>
+                    </GeometryDrawing.Brush>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+</ResourceDictionary>

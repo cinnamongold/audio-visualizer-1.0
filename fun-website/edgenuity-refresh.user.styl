@@ -1,0 +1,328 @@
+﻿/* ==UserStyle==
+@name           Edgenuity UI Refresh
+@namespace      github.com/nicoo/custom-stylus
+@version        1.0.1
+@description    Cleaner, more modern Edgenuity-inspired UI refresh for the player and shared UI kit.
+@author         OpenAI
+@preprocessor   stylus
+@var text host "Target subdomain" "example.edgenuity.com"
+@var color accent "Accent color" #6d5efc
+@var color accent2 "Secondary accent" #22c7f2
+@var color success "Success color" #2ac27a
+@var color bg "App background" #0b1020
+@var color surface "Primary surface" #121a2b
+@var color surface2 "Secondary surface" #182338
+@var color textColor "Main text" #eef4ff
+@var color mutedText "Muted text" #9db0d0
+@var color borderColor "Border color" rgba(255,255,255,.10)
+==/UserStyle== */
+
+edShadow = 0 18px 50px rgba(0, 0, 0, .34)
+edShadowSoft = 0 8px 24px rgba(0, 0, 0, .22)
+edRadius = 16px
+edGradient = linear-gradient(135deg, accent 0%, accent2 100%)
+edPanel = linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02))
+edHeader = linear-gradient(180deg, rgba(24,35,56,.96), rgba(16,23,38,.92))
+edFooter = linear-gradient(180deg, rgba(20,28,45,.96), rgba(12,17,29,.98))
+edModal = linear-gradient(180deg, rgba(24,35,56,.98), rgba(14,20,33,.98))
+edBtn = linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04)), #1a2740
+edBtnHover = linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06)), #223150
+edSubtle = rgba(255,255,255,.08)
+edSubtle2 = rgba(255,255,255,.05)
+edSubtle3 = rgba(255,255,255,.03)
+
+@-moz-document domain(host)
+  html,
+  body
+    background radial-gradient(circle at top, rgba(109, 94, 252, .16), transparent 34%), linear-gradient(180deg, #0a1020 0%, bg 100%) !important
+    color textColor !important
+
+  body,
+  input,
+  select,
+  textarea,
+  button
+    font-family Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important
+
+  a
+    color #cdeeff !important
+    transition color .18s ease, opacity .18s ease
+
+    &:hover
+      color white !important
+
+  .content,
+  .body-container,
+  .playerbg,
+  .ui-main-container div.content,
+  .uikit-contentunit-container-header,
+  .modal .modalbody,
+  .notepad-inner,
+  .uikit-rubric-content,
+  .transcript-text,
+  .dropdown,
+  .header-menu,
+  .footer-wrapper,
+  .mainfoot
+    background edPanel, surface !important
+    border 1px solid borderColor !important
+    border-radius edRadius !important
+    box-shadow edShadowSoft !important
+    backdrop-filter blur(14px)
+
+  .content,
+  .body-container,
+  .playerbg,
+  .footer-wrapper,
+  .mainfoot,
+  .toolbar,
+  .dropdown,
+  .modalwrap,
+  .modal .modalbody
+    overflow hidden
+
+  .uikit-student-header .header-wrapper,
+  .uikit-teacher-header .header-wrapper,
+  nav.header-menu,
+  .uikit-student-header .header-menu,
+  .uikit-teacher-header .header-menu,
+  .toolbar
+    background edHeader !important
+    border 1px solid rgba(255,255,255,.08) !important
+    box-shadow edShadowSoft !important
+
+  .uikit-student-header .header-menu ul li a,
+  .uikit-teacher-header .header-menu ul li a,
+  nav.header-menu a,
+  .nav a
+    color mutedText !important
+    border-radius 999px !important
+    padding .7rem 1rem !important
+    transition background .18s ease, color .18s ease, transform .18s ease
+
+    &:hover
+      background rgba(255,255,255,.07) !important
+      color textColor !important
+      transform translateY(-1px)
+
+  .uikit-student-header .header-menu ul li.selected a,
+  .uikit-teacher-header .header-menu ul li.selected a,
+  .nav .selected a,
+  .nav a.active
+    background edGradient !important
+    color white !important
+    box-shadow 0 10px 24px rgba(109, 94, 252, .35) !important
+
+  .uibtn,
+  .uibtn .button,
+  .uibtn-blue,
+  .uibtn-alt,
+  .plainbtn,
+  .ed-btn,
+  button,
+  input[type="button"],
+  input[type="submit"]
+    background edBtn !important
+    color textColor !important
+    border 1px solid rgba(255,255,255,.10) !important
+    border-radius 999px !important
+    box-shadow 0 8px 22px rgba(0,0,0,.18) !important
+    transition transform .14s ease, box-shadow .18s ease, background .18s ease !important
+
+    &:hover
+      transform translateY(-1px)
+      box-shadow 0 12px 26px rgba(0,0,0,.24) !important
+      background edBtnHover !important
+
+  .uibtn-blue,
+  .uibtn.next,
+  .ed-btn,
+  .botbut.addall
+    background edGradient !important
+    border-color transparent !important
+    color white !important
+    box-shadow 0 12px 28px rgba(109, 94, 252, .34) !important
+
+  .uibtn.previous,
+  .botbut.remall
+    background linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03)), #172236 !important
+
+  .footnav,
+  .mainfoot,
+  .footer-wrapper
+    background edFooter !important
+    border-top 1px solid rgba(255,255,255,.08) !important
+
+  .nav-icon,
+  .footnav .uibtn,
+  .mainfoot .uibtn
+    border-radius 14px !important
+
+  .gradebar-wrap,
+  .gradebar,
+  .progress,
+  [class*="progress"]
+    background edSubtle !important
+    border-radius 999px !important
+    overflow hidden !important
+    border 1px solid rgba(255,255,255,.06) !important
+
+  .gradebar > *,
+  .progress > *,
+  [class*="progress"] > *
+    background edGradient !important
+    box-shadow inset 0 0 12px rgba(255,255,255,.15)
+
+  .modalwrap,
+  .modal .modalbody,
+  .uikit-rubric-container,
+  .uikit-rubric-content,
+  .notepad-form-advanced,
+  .notepad-note,
+  .transcript-text,
+  .dropdown,
+  .ui-selectmenu-menu,
+  .ui-widget,
+  .ui-dialog
+    background edModal !important
+    color textColor !important
+    border 1px solid rgba(255,255,255,.10) !important
+    border-radius edRadius !important
+    box-shadow edShadow !important
+
+  .modalwrap .lightboxfoot,
+  .uikit-rubric-footer
+    background edSubtle3 !important
+    border-top 1px solid rgba(255,255,255,.08) !important
+
+  .uitable,
+  table
+    border-collapse separate !important
+    border-spacing 0 8px !important
+    color textColor !important
+
+  .uitable tbody tr,
+  table tbody tr
+    background rgba(255,255,255,.035) !important
+
+  .uitable tbody tr td,
+  .uitable tbody tr th,
+  table tbody tr td,
+  table tbody tr th
+    background transparent !important
+    border-top 1px solid rgba(255,255,255,.05) !important
+    border-bottom 1px solid rgba(255,255,255,.05) !important
+
+  .uitable tbody tr td:first-child,
+  .uitable tbody tr th:first-child,
+  table tbody tr td:first-child,
+  table tbody tr th:first-child
+    border-left 1px solid rgba(255,255,255,.05) !important
+    border-radius 12px 0 0 12px !important
+
+  .uitable tbody tr td:last-child,
+  .uitable tbody tr th:last-child,
+  table tbody tr td:last-child,
+  table tbody tr th:last-child
+    border-right 1px solid rgba(255,255,255,.05) !important
+    border-radius 0 12px 12px 0 !important
+
+  .uitable tbody tr:hover td,
+  table tbody tr:hover td
+    background edSubtle2 !important
+
+  input[type="text"],
+  input[type="search"],
+  input[type="email"],
+  input[type="password"],
+  textarea,
+  select
+    background edSubtle2 !important
+    color textColor !important
+    border 1px solid rgba(255,255,255,.10) !important
+    border-radius 12px !important
+    box-shadow inset 0 1px 0 rgba(255,255,255,.03) !important
+
+    &:focus
+      outline none !important
+      border-color rgba(109, 94, 252, .7) !important
+      box-shadow 0 0 0 4px rgba(109, 94, 252, .18) !important
+
+  .tree-node-element,
+  .tree-parent,
+  .gradetab,
+  .tag
+    background rgba(255,255,255,.04) !important
+    border 1px solid rgba(255,255,255,.06) !important
+    border-radius 12px !important
+
+  .tree-node-element:hover,
+  .gradetab:hover,
+  .tag:hover
+    background rgba(255,255,255,.07) !important
+
+  .warning,
+  .notify,
+  .submitted,
+  .score
+    border-radius 12px !important
+    border 1px solid rgba(255,255,255,.08) !important
+    padding .75rem 1rem !important
+
+  .warning
+    background rgba(255, 183, 77, .12) !important
+    color #ffd79a !important
+
+  .notify,
+  .submitted
+    background rgba(42, 194, 122, .12) !important
+    color #9bf0c7 !important
+
+  .nav-icon,
+  .icon-rubric-gray,
+  .header-user .icons,
+  .audio,
+  .label
+    filter saturate(1.15)
+
+  *
+    scrollbar-width thin
+    scrollbar-color rgba(255,255,255,.22) transparent
+
+  *::-webkit-scrollbar
+    width 10px
+    height 10px
+
+  *::-webkit-scrollbar-track
+    background transparent
+
+  *::-webkit-scrollbar-thumb
+    background rgba(255,255,255,.15)
+    border-radius 999px
+    border 2px solid transparent
+    background-clip padding-box
+
+  *::-webkit-scrollbar-thumb:hover
+    background rgba(255,255,255,.24)
+    border 2px solid transparent
+    background-clip padding-box
+
+  [style*="ui-bg_"],
+  .ui-widget-header,
+  .ui-state-default,
+  .ui-widget-content,
+  .ui-dialog .ui-dialog-titlebar
+    background-image none !important
+
+  .ui-widget-header,
+  .ui-dialog .ui-dialog-titlebar
+    background linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03)), #162238 !important
+    color textColor !important
+    border 1px solid rgba(255,255,255,.08) !important
+
+  .content,
+  .modal .modalbody,
+  .notepad-inner,
+  .uikit-rubric-content,
+  .transcript-text
+    padding 1rem !important

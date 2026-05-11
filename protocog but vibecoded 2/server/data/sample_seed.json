@@ -1,0 +1,197 @@
+{
+  "exported_at": "2026-04-27T00:00:00.000Z",
+  "files": {
+    "memory": {
+      "profile": {
+        "name": "friend"
+      },
+      "facts": [],
+      "preferences": [],
+      "topics": {},
+      "conversation": [],
+      "recent_learning": [
+        {
+          "at": "2026-04-27T00:00:00.000Z",
+          "type": "seed",
+          "summary": "Optional starter dataset ready to import and train."
+        }
+      ],
+      "settings": {
+        "autoTrain": false
+      },
+      "stats": {
+        "total_messages": 0,
+        "total_trains": 0,
+        "new_examples_since_train": 0,
+        "last_train_at": null,
+        "last_train_result": null
+      },
+      "last_example_id": null,
+      "last_bot_label": null,
+      "last_template_key": null
+    },
+    "examples": {
+      "version": 1,
+      "items": [
+        {
+          "id": "seed-1",
+          "text": "hello",
+          "label": "greeting",
+          "weight": 1.0,
+          "preferred": true,
+          "source": "seed",
+          "created_at": "2026-04-27T00:00:00.000Z",
+          "metadata": {}
+        },
+        {
+          "id": "seed-2",
+          "text": "hey there",
+          "label": "greeting",
+          "weight": 1.0,
+          "preferred": true,
+          "source": "seed",
+          "created_at": "2026-04-27T00:00:00.000Z",
+          "metadata": {}
+        },
+        {
+          "id": "seed-3",
+          "text": "my name is sam",
+          "label": "self_intro",
+          "weight": 1.0,
+          "preferred": true,
+          "source": "seed",
+          "created_at": "2026-04-27T00:00:00.000Z",
+          "metadata": {}
+        },
+        {
+          "id": "seed-4",
+          "text": "i am working on a game",
+          "label": "fact_share",
+          "weight": 1.0,
+          "preferred": true,
+          "source": "seed",
+          "created_at": "2026-04-27T00:00:00.000Z",
+          "metadata": {}
+        },
+        {
+          "id": "seed-5",
+          "text": "i like ramen",
+          "label": "preference_share",
+          "weight": 1.0,
+          "preferred": true,
+          "source": "seed",
+          "created_at": "2026-04-27T00:00:00.000Z",
+          "metadata": {}
+        },
+        {
+          "id": "seed-6",
+          "text": "my favorite music is jazz",
+          "label": "preference_share",
+          "weight": 1.0,
+          "preferred": true,
+          "source": "seed",
+          "created_at": "2026-04-27T00:00:00.000Z",
+          "metadata": {}
+        },
+        {
+          "id": "seed-7",
+          "text": "what do i like",
+          "label": "preference_query",
+          "weight": 1.0,
+          "preferred": true,
+          "source": "seed",
+          "created_at": "2026-04-27T00:00:00.000Z",
+          "metadata": {}
+        },
+        {
+          "id": "seed-8",
+          "text": "what do you remember about me",
+          "label": "memory_query",
+          "weight": 1.0,
+          "preferred": true,
+          "source": "seed",
+          "created_at": "2026-04-27T00:00:00.000Z",
+          "metadata": {}
+        },
+        {
+          "id": "seed-9",
+          "text": "actually that's wrong",
+          "label": "correction",
+          "weight": 1.0,
+          "preferred": true,
+          "source": "seed",
+          "created_at": "2026-04-27T00:00:00.000Z",
+          "metadata": {}
+        },
+        {
+          "id": "seed-10",
+          "text": "thanks",
+          "label": "gratitude",
+          "weight": 1.0,
+          "preferred": true,
+          "source": "seed",
+          "created_at": "2026-04-27T00:00:00.000Z",
+          "metadata": {}
+        },
+        {
+          "id": "seed-11",
+          "text": "bye",
+          "label": "farewell",
+          "weight": 1.0,
+          "preferred": true,
+          "source": "seed",
+          "created_at": "2026-04-27T00:00:00.000Z",
+          "metadata": {}
+        },
+        {
+          "id": "seed-12",
+          "text": "can you help me with school",
+          "label": "question",
+          "weight": 1.0,
+          "preferred": true,
+          "source": "seed",
+          "created_at": "2026-04-27T00:00:00.000Z",
+          "metadata": {}
+        },
+        {
+          "id": "seed-13",
+          "text": "let's talk about music",
+          "label": "topic_followup",
+          "weight": 1.0,
+          "preferred": true,
+          "source": "seed",
+          "created_at": "2026-04-27T00:00:00.000Z",
+          "metadata": {}
+        }
+      ]
+    },
+    "vocab": {
+      "token_to_id": {
+        "<pad>": 0,
+        "<unk>": 1
+      },
+      "id_to_token": [
+        "<pad>",
+        "<unk>"
+      ],
+      "updated_at": null
+    },
+    "config": {
+      "labels": [
+        "greeting",
+        "self_intro",
+        "fact_share",
+        "preference_share",
+        "preference_query",
+        "memory_query",
+        "correction",
+        "gratitude",
+        "farewell",
+        "question",
+        "topic_followup",
+        "fallback"
+      ]
+    },
+    "model_base64": null
+  }
+}

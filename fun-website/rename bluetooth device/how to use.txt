@@ -1,0 +1,8 @@
+Open Command Shell as Admin in this folder.
+
+1. cd "C:\Users\nicoo\OneDrive\Documents\0-vsc files\ai\fun-website\rename bluetooth device"
+2. node server.js
+3. In a browser, open localhost:3000
+4. Follow the steps shown
+
+;)

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Glass Media Player</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-highlight: rgba(255, 255, 255, 0.4);
+            --glass-shadow: rgba(0, 0, 0, 0.2);
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.6);
+            --accent: rgba(255, 255, 255, 0.9);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Animated Aurora Background to show off refraction */
+        .ambient-background {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1;
+            background: radial-gradient(circle at 15% 50%, #4facfe, transparent 50%),
+                        radial-gradient(circle at 85% 30%, #00f2fe, transparent 50%),
+                        radial-gradient(circle at 50% 80%, #f093fb, transparent 50%),
+                        radial-gradient(circle at 80% 90%, #f5576c, transparent 50%);
+            background-size: 200% 200%;
+            animation: aurora 15s ease infinite alternate;
+            filter: blur(60px);
+        }
+
+        @keyframes aurora {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 50% 100%; }
+        }
+
+        /* iOS 26 Liquid Glass Base Utility */
+        .liquid-glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-top: 1px solid var(--glass-highlight);
+            border-left: 1px solid var(--glass-highlight);
+            box-shadow: 
+                0 30px 60px -10px var(--glass-shadow), 
+                inset 0 1px 2px rgba(255, 255, 255, 0.3),
+                inset 0 -1px 2px rgba(255, 255, 255, 0.05);
+            border-radius: 32px;
+        }
+
+        /* App Layout */
+        .app-container {
+            width: 95vw;
+            height: 90vh;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            grid-template-rows: 1fr 100px;
+            gap: 20px;
+            max-width: 1600px;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            grid-column: 1;
+            grid-row: 1;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .brand {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            padding-left: 15px;
+            background: linear-gradient(to right, #fff, #a1c4fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .nav-item {
+            padding: 15px 20px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-item.active {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Main Content Area */
+        .main-content {
+            grid-column: 2;
+            grid-row: 1;
+            position: relative;
+            overflow: hidden;
+            padding: 30px;
+        }
+
+        .page {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            padding: 40px;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.98) translateY(10px);
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .page.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: scale(1) translateY(0);
+        }
+
+        .page-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            letter-spacing: -1.5px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Mock Content Grid */
+        .glass-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .glass-card {
+            aspect-ratio: 1;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2), inset 0 1px 2px rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Bottom Player Bar */
+        .player-bar {
+            grid-column: 1 / 3;
+            grid-row: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            z-index: 10;
+        }
+
+        /* iOS 26 Refractive Liquid Sliders */
+        .slider-container {
+            flex: 1;
+            margin: 0 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .time-text {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            font-variant-numeric: tabular-nums;
+        }
+
+        input[type=range].liquid-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            outline: none;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 
+                        inset 0 -1px 2px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+        }
+
+        /* The thumb applies the SVG filter to distort the background like a glass droplet */
+        input[type=range].liquid-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4), 
+                        inset 0 4px 5px rgba(255,255,255,0.8),
+                        inset 0 -2px 5px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+            /* This SVG filter creates the liquid refraction distortion! */
+            filter: url(#liquid-refraction);
+        }
+
+        input[type=range].liquid-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        input[type=range].liquid-slider::-webkit-slider-thumb:active {
+            transform: scale(0.95);
+            filter: url(#liquid-refraction) brightness(1.2);
+        }
+
+        /* Mock Player Controls */
+        .controls {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.2);
+            transition: all 0.2s;
+        }
+
+        .btn.play {
+            width: 55px;
+            height: 55px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.4);
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Play Icon Polygon */
+        .play-icon {
+            width: 0; height: 0;
+            border-style: solid;
+            border-width: 8px 0 8px 14px;
+            border-color: transparent transparent transparent #fff;
+            margin-left: 4px;
+        }
+
+        /* Settings Toggle Demo */
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient moving background for refraction effect -->
+    <div class="ambient-background"></div>
+
+    <!-- Hidden SVG Filters for Liquid Glass / Refraction Physics -->
+    <svg width="0" height="0" style="position: absolute;">
+        <defs>
+            <!-- Refraction distortion map -->
+            <filter id="liquid-refraction" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G" result="displaced" />
+                <feGaussianBlur in="displaced" stdDeviation="0.5" result="blurred" />
+                <!-- Merge the smooth blurred distortion with crisp highlights -->
+                <feMerge>
+                    <feMergeNode in="blurred" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="app-container">
+        
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar liquid-glass">
+            <div class="brand">AudioGlass</div>
+            <div class="nav-item active" data-target="home">Home</div>
+            <div class="nav-item" data-target="library">Library</div>
+            <div class="nav-item" data-target="recents">Recents</div>
+            <div class="nav-item" data-target="settings">Settings</div>
+        </nav>
+
+        <!-- Dynamic Main Content Area -->
+        <main class="main-content liquid-glass">
+            
+            <!-- Home Page -->
+            <section id="home" class="page active">
+                <h1 class="page-title">Good Morning</h1>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Featured Curations</p>
+                <div class="glass-grid">
+                    <div class="glass-card"></div>
+                    <div class="glass-card"></div>
+                    <div class="glass-card"></div>
+                    <div class="glass-card"></div>
+                </div>
+            </section>
+
+            <!-- Library Page -->
+            <section id="library" class="page">
+                <h1 class="page-title">Your Library</h1>
+                <div class="glass-grid" style="grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));">
+                    <div class="glass-card" style="border-radius: 12px;"></div>
+                    <div class="glass-card" style="border-radius: 12px;"></div>
+                    <div class="glass-card" style="border-radius: 12px;"></div>
+                    <div class="glass-card" style="border-radius: 12px;"></div>
+                    <div class="glass-card" style="border-radius: 12px;"></div>
+                    <div class="glass-card" style="border-radius: 12px;"></div>
+                </div>
+            </section>
+
+            <!-- Recents Page -->
+            <section id="recents" class="page">
+                <h1 class="page-title">Recently Played</h1>
+                <div style="display:flex; flex-direction: column; gap:10px;">
+                    <div class="setting-row" style="border-radius: 12px; padding: 15px;">Track 01 - Unknown Artist</div>
+                    <div class="setting-row" style="border-radius: 12px; padding: 15px;">Track 02 - Unknown Artist</div>
+                    <div class="setting-row" style="border-radius: 12px; padding: 15px;">Track 03 - Unknown Artist</div>
+                </div>
+            </section>
+
+            <!-- Settings Page -->
+            <section id="settings" class="page">
+                <h1 class="page-title">Settings</h1>
+                
+                <div class="setting-row">
+                    <div>
+                        <h3>High-Res Audio</h3>
+                        <p style="font-size: 13px; color: var(--text-muted); margin-top: 5px;">Enable lossless FLAC/ALAC playback</p>
+                    </div>
+                    <!-- Settings Liquid Slider (Toggle representation) -->
+                    <input type="range" min="0" max="1" value="1" class="liquid-slider" style="width: 60px;" />
+                </div>
+                
+                <div class="setting-row">
+                    <div>
+                        <h3>Crossfade Liquid Effect</h3>
+                        <p style="font-size: 13px; color: var(--text-muted); margin-top: 5px;">Overlap tracks seamlessly</p>
+                    </div>
+                    <input type="range" min="0" max="12" value="4" class="liquid-slider" style="width: 150px;" />
+                </div>
+
+            </section>
+        </main>
+
+        <!-- Bottom Player Bar -->
+        <div class="player-bar liquid-glass">
+            
+            <div style="display:flex; align-items:center; gap: 15px; min-width: 200px;">
+                <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(255,255,255,0.2); box-shadow: inset 0 1px 2px rgba(255,255,255,0.4);"></div>
+                <div>
+                    <div style="font-weight: 600; font-size: 15px;">No Media Loaded</div>
+                    <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Local Storage</div>
+                </div>
+            </div>
+
+            <!-- Playback Controls -->
+            <div class="controls">
+                <div class="btn">
+                    <svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M19 20L9 12l10-8v16zM5 19h2V5H5v14z"></path></svg>
+                </div>
+                <div class="btn play">
+                    <div class="play-icon"></div>
+                </div>
+                <div class="btn">
+                    <svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M5 4l10 8-10 8V4zm14 1v14h-2V5h2z"></path></svg>
+                </div>
+            </div>
+
+            <!-- Liquid Scrubber -->
+            <div class="slider-container">
+                <span class="time-text">0:00</span>
+                <input type="range" min="0" max="100" value="0" class="liquid-slider" />
+                <span class="time-text">-:--</span>
+            </div>
+
+            <!-- Volume Control -->
+            <div style="width: 120px; display:flex; align-items:center;">
+                <svg width="18" height="18" fill="rgba(255,255,255,0.6)" viewBox="0 0 24 24" style="margin-right: 10px;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"></path></svg>
+                <input type="range" min="0" max="100" value="80" class="liquid-slider" />
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Page Navigation Logic -->
+    <script>
+        const navItems = document.querySelectorAll('.nav-item');
+        const pages = document.querySelectorAll('.page');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active class from all
+                navItems.forEach(nav => nav.classList.remove('active'));
+                pages.forEach(page => page.classList.remove('active'));
+
+                // Add active class to clicked nav and corresponding page
+                item.classList.add('active');
+                const targetId = item.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

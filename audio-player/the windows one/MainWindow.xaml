@@ -1,0 +1,777 @@
+<Window x:Class="LiquidAudioPlayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:LiquidAudioPlayer.Controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        mc:Ignorable="d"
+        Title="Liquid Audio Player"
+        Height="820"
+        Width="1180"
+        MinHeight="680"
+        MinWidth="1020"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="CanResize"
+        Background="#070808"
+        FontFamily="Segoe UI Variable Text, Segoe UI"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True">
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome CaptionHeight="0"
+                            CornerRadius="22"
+                            GlassFrameThickness="0"
+                            ResizeBorderThickness="8" />
+    </shell:WindowChrome.WindowChrome>
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#08090A" Offset="0" />
+                <GradientStop Color="#171013" Offset="0.38" />
+                <GradientStop Color="#091211" Offset="0.66" />
+                <GradientStop Color="#060708" Offset="1" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Rectangle Fill="{StaticResource MusicFlowBackgroundBrush}"
+                   Opacity="0.82"
+                   IsHitTestVisible="False" />
+
+        <Canvas ClipToBounds="True" IsHitTestVisible="False">
+            <Ellipse Width="620" Height="620" Canvas.Left="-170" Canvas.Top="-170" Opacity="0.42">
+                <Ellipse.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#8BF7E7" Offset="0" />
+                        <GradientStop Color="#247E58" Offset="0.35" />
+                        <GradientStop Color="#00000000" Offset="1" />
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Ellipse Width="760" Height="760" Canvas.Right="-260" Canvas.Top="-120" Opacity="0.38">
+                <Ellipse.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#FF72A8" Offset="0" />
+                        <GradientStop Color="#493257" Offset="0.42" />
+                        <GradientStop Color="#00000000" Offset="1" />
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Ellipse Width="560" Height="560" Canvas.Left="350" Canvas.Bottom="-260" Opacity="0.34">
+                <Ellipse.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#F8DC79" Offset="0" />
+                        <GradientStop Color="#5D6A38" Offset="0.38" />
+                        <GradientStop Color="#00000000" Offset="1" />
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+
+            <Border Width="172" Height="172" Canvas.Left="72" Canvas.Top="132" CornerRadius="32" Opacity="0.34" RenderTransformOrigin="0.5,0.5">
+                <Border.RenderTransform>
+                    <RotateTransform Angle="-14" />
+                </Border.RenderTransform>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#E4FEFF" Offset="0" />
+                        <GradientStop Color="#35DDBB" Offset="0.34" />
+                        <GradientStop Color="#1A1B1D" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Border Width="140" Height="140" Canvas.Left="214" Canvas.Top="92" CornerRadius="28" Opacity="0.28" RenderTransformOrigin="0.5,0.5">
+                <Border.RenderTransform>
+                    <RotateTransform Angle="18" />
+                </Border.RenderTransform>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#FFF0B8" Offset="0" />
+                        <GradientStop Color="#F27A66" Offset="0.54" />
+                        <GradientStop Color="#17171A" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Border Width="210" Height="210" Canvas.Right="108" Canvas.Bottom="76" CornerRadius="38" Opacity="0.25" RenderTransformOrigin="0.5,0.5">
+                <Border.RenderTransform>
+                    <RotateTransform Angle="10" />
+                </Border.RenderTransform>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#FFFFFF" Offset="0" />
+                        <GradientStop Color="#84A3FF" Offset="0.4" />
+                        <GradientStop Color="#231927" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Border Width="156" Height="156" Canvas.Right="332" Canvas.Top="156" CornerRadius="30" Opacity="0.22" RenderTransformOrigin="0.5,0.5">
+                <Border.RenderTransform>
+                    <RotateTransform Angle="-22" />
+                </Border.RenderTransform>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#EFFFE2" Offset="0" />
+                        <GradientStop Color="#60D46F" Offset="0.48" />
+                        <GradientStop Color="#121B17" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+        </Canvas>
+
+        <Grid Margin="22">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="64" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="TitleBar"
+                  Grid.Row="0"
+                  MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="260" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="150" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Width="42" Height="42" CornerRadius="16" BorderBrush="#80FFFFFF" BorderThickness="1">
+                        <Border.Background>
+                            <RadialGradientBrush Center="0.18,0.1" GradientOrigin="0.1,0.05" RadiusX="1" RadiusY="1">
+                                <GradientStop Color="#FFFFFFFF" Offset="0" />
+                                <GradientStop Color="#97F4FFEA" Offset="0.38" />
+                                <GradientStop Color="#3AFF91BD" Offset="0.72" />
+                                <GradientStop Color="#40111318" Offset="1" />
+                            </RadialGradientBrush>
+                        </Border.Background>
+                        <TextBlock Text="LA"
+                                   Foreground="#081011"
+                                   FontWeight="Black"
+                                   FontSize="15"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
+                    </Border>
+                    <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                        <TextBlock Text="Liquid Audio" Foreground="{StaticResource TextPrimaryBrush}" FontSize="16" FontWeight="SemiBold" />
+                        <TextBlock Text="Local media player shell" Style="{StaticResource TinyLabelTextStyle}" />
+                    </StackPanel>
+                </StackPanel>
+
+                <Border Grid.Column="1"
+                        Width="390"
+                        Height="42"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        CornerRadius="21"
+                        BorderBrush="#2CFFFFFF"
+                        BorderThickness="1"
+                        Background="#18FFFFFF">
+                    <Grid Margin="14,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="LOCAL"
+                                   Style="{StaticResource TinyLabelTextStyle}"
+                                   Foreground="#E9FFFB"
+                                   VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="1"
+                                   Text="Glass-first desktop foundation"
+                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                   FontSize="12"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="2"
+                                   Text="BASEPLATE"
+                                   Style="{StaticResource TinyLabelTextStyle}"
+                                   Foreground="#FFE8F0"
+                                   VerticalAlignment="Center" />
+                    </Grid>
+                </Border>
+
+                <StackPanel Grid.Column="2"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            shell:WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Button Content="-"
+                            ToolTip="Minimize"
+                            Background="#FFFFBD2E"
+                            Click="MinimizeButton_Click"
+                            Style="{StaticResource MacWindowButtonStyle}" />
+                    <Button Content="+"
+                            ToolTip="Fullscreen"
+                            Background="#FF28C840"
+                            Click="MaximizeButton_Click"
+                            Style="{StaticResource MacWindowButtonStyle}"
+                            Margin="10,0,0,0" />
+                    <Button Content="x"
+                            ToolTip="Exit"
+                            Background="#FFFF5F57"
+                            Click="CloseButton_Click"
+                            Style="{StaticResource MacWindowButtonStyle}"
+                            Margin="10,0,0,0" />
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="260" />
+                    <ColumnDefinition Width="18" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Style="{StaticResource LiquidRailStyle}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel>
+                            <TextBlock Text="Pages" Style="{StaticResource TinyLabelTextStyle}" Margin="2,0,0,12" />
+
+                            <ToggleButton x:Name="HomeNav"
+                                          Tag="Home"
+                                          IsChecked="True"
+                                          Click="NavItem_Click"
+                                          Style="{StaticResource NavToggleStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Path Width="22" Height="22" Stretch="Uniform" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" Data="M3,11 L12,4 L21,11 M6,10 V20 H10 V15 H14 V20 H18 V10" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}}" />
+                                    <TextBlock Text="Home" Margin="12,0,0,0" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </ToggleButton>
+
+                            <ToggleButton x:Name="LibraryNav"
+                                          Tag="Library"
+                                          Click="NavItem_Click"
+                                          Style="{StaticResource NavToggleStyle}"
+                                          Margin="0,8,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <Path Width="22" Height="22" Stretch="Uniform" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" Data="M5,4 H19 V20 H5 Z M8,7 H16 M8,11 H16 M8,15 H13" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}}" />
+                                    <TextBlock Text="Library" Margin="12,0,0,0" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </ToggleButton>
+
+                            <ToggleButton x:Name="RecentsNav"
+                                          Tag="Recents"
+                                          Click="NavItem_Click"
+                                          Style="{StaticResource NavToggleStyle}"
+                                          Margin="0,8,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <Path Width="22" Height="22" Stretch="Uniform" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" Data="M12,4 A8,8 0 1 1 4,12 M4,5 V10 H9 M12,8 V13 L16,15" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}}" />
+                                    <TextBlock Text="Recents" Margin="12,0,0,0" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </ToggleButton>
+
+                            <ToggleButton x:Name="SettingsNav"
+                                          Tag="Settings"
+                                          Click="NavItem_Click"
+                                          Style="{StaticResource NavToggleStyle}"
+                                          Margin="0,8,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <Path Width="22" Height="22" Stretch="Uniform" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" Data="M5,8 H19 M8,8 A2,2 0 1 0 8,12 A2,2 0 1 0 8,8 M5,16 H19 M16,12 A2,2 0 1 0 16,16 A2,2 0 1 0 16,12" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}}" />
+                                    <TextBlock Text="Settings" Margin="12,0,0,0" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </ToggleButton>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                            <TextBlock Text="Signal" Style="{StaticResource TinyLabelTextStyle}" Margin="2,0,0,10" />
+                            <Border Style="{StaticResource LiquidSurfaceStyle}" Padding="14">
+                                <StackPanel>
+                                    <Grid Height="92">
+                                        <Border Width="92"
+                                                Height="92"
+                                                HorizontalAlignment="Left"
+                                                CornerRadius="22"
+                                                BorderBrush="#5CFFFFFF"
+                                                BorderThickness="1">
+                                            <Border.Background>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                    <GradientStop Color="#FFF8DA" Offset="0" />
+                                                    <GradientStop Color="#5DE3CA" Offset="0.42" />
+                                                    <GradientStop Color="#1F1826" Offset="1" />
+                                                </LinearGradientBrush>
+                                            </Border.Background>
+                                        </Border>
+                                        <StackPanel Margin="108,4,0,0">
+                                            <controls:AutoFitTextBlock Text="{Binding SignalTitle}" Foreground="{StaticResource TextPrimaryBrush}" FontSize="15" MaxFontSize="15" MinFontSize="10" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                            <TextBlock Text="{Binding SignalSubtitle}" Style="{StaticResource MutedTextStyle}" Margin="0,5,0,0" TextWrapping="Wrap" />
+                                            <TextBlock Text="AAC / FLAC / MP3 / WAV" Style="{StaticResource TinyLabelTextStyle}" Margin="0,12,0,0" />
+                                        </StackPanel>
+                                    </Grid>
+                                    <Slider Value="42" Style="{StaticResource LiquidSliderStyle}" Margin="0,14,0,0" />
+                                    <Grid Margin="0,10,0,0">
+                                        <TextBlock Text="00:00" Style="{StaticResource TinyLabelTextStyle}" />
+                                        <TextBlock Text="03:48" Style="{StaticResource TinyLabelTextStyle}" HorizontalAlignment="Right" />
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2">
+                            <TextBlock Text="Volume" Style="{StaticResource TinyLabelTextStyle}" Margin="2,0,0,4" />
+                            <Slider Value="68" Style="{StaticResource LiquidSliderStyle}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Column="2" Style="{StaticResource LiquidPanelStyle}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="230" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel>
+                                <TextBlock x:Name="CurrentPageEyebrow"
+                                           Text="HOME"
+                                           Style="{StaticResource TinyLabelTextStyle}"
+                                           Foreground="#DFFFF8" />
+                                <controls:AutoFitTextBlock x:Name="CurrentPageTitle"
+                                                           Text="Home"
+                                                           Style="{StaticResource PageTitleTextStyle}"
+                                                           MaxFontSize="34"
+                                                           MinFontSize="20"
+                                                           Margin="0,4,0,0" />
+                            </StackPanel>
+
+                            <TextBox Grid.Column="1"
+                                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource GlassTextBoxStyle}"
+                                     VerticalAlignment="Center" />
+
+                            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="12,0,0,0">
+                                <Button Content="Import" Click="ImportButton_Click" Style="{StaticResource GlassButtonStyle}" />
+                                <Button Content="Scan" Click="ScanButton_Click" Style="{StaticResource GlassButtonStyle}" Margin="8,0,0,0" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Row="1" Margin="0,22,0,0">
+                            <Grid x:Name="HomePage">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="292" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.08*" />
+                                    <ColumnDefinition Width="18" />
+                                    <ColumnDefinition Width="0.92*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0" Style="{StaticResource LiquidSurfaceStyle}" Padding="22">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="230" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Border Width="210"
+                                                Height="210"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"
+                                                CornerRadius="42"
+                                                BorderBrush="#84FFFFFF"
+                                                BorderThickness="1">
+                                            <Border.Background>
+                                                <RadialGradientBrush Center="0.22,0.18" GradientOrigin="0.12,0.1" RadiusX="1" RadiusY="1">
+                                                    <GradientStop Color="#FFFFFFFF" Offset="0" />
+                                                    <GradientStop Color="#9AF9DA" Offset="0.25" />
+                                                    <GradientStop Color="#FF7CB1" Offset="0.58" />
+                                                    <GradientStop Color="#161219" Offset="1" />
+                                                </RadialGradientBrush>
+                                            </Border.Background>
+                                        </Border>
+
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="Now staged" Style="{StaticResource TinyLabelTextStyle}" Foreground="#E9FFFB" />
+                                            <controls:AutoFitTextBlock Text="{Binding HeroTitle}" Foreground="{StaticResource TextPrimaryBrush}" FontSize="30" MaxFontSize="30" MinFontSize="18" FontWeight="SemiBold" TextWrapping="Wrap" Margin="0,6,0,0" />
+                                            <TextBlock Text="{Binding HeroSubtitle}" Style="{StaticResource MutedTextStyle}" TextWrapping="Wrap" Margin="0,8,0,16" />
+                                            <Slider Value="36" Style="{StaticResource LiquidSliderStyle}" />
+                                            <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                                                <Button Content="Prev" Style="{StaticResource GlassButtonStyle}" />
+                                                <Button Content="Play" Style="{StaticResource GlassButtonStyle}" Margin="8,0,0,0" />
+                                                <Button Content="Next" Style="{StaticResource GlassButtonStyle}" Margin="8,0,0,0" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Column="2" Style="{StaticResource LiquidSurfaceStyle}" Padding="22">
+                                    <StackPanel>
+                                        <TextBlock Text="Today" Style="{StaticResource SectionTitleTextStyle}" />
+                                        <Grid Margin="0,18,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="82" />
+                                                <RowDefinition Height="14" />
+                                                <RowDefinition Height="82" />
+                                            </Grid.RowDefinitions>
+                                            <Border Grid.Row="0" Grid.Column="0" Margin="0,0,7,0" Style="{StaticResource MediaTileStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding ImportedTrackCountText}" Style="{StaticResource TinyLabelTextStyle}" Foreground="#E9FFFB" />
+                                                    <controls:AutoFitTextBlock Text="Tracks imported" Foreground="{StaticResource TextPrimaryBrush}" FontSize="20" MaxFontSize="20" MinFontSize="12" FontWeight="SemiBold" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Grid.Row="0" Grid.Column="1" Margin="7,0,0,0" Style="{StaticResource MediaTileStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding LibraryFormatCountText}" Style="{StaticResource TinyLabelTextStyle}" Foreground="#FFE8F0" />
+                                                    <controls:AutoFitTextBlock Text="Formats" Foreground="{StaticResource TextPrimaryBrush}" FontSize="20" MaxFontSize="20" MinFontSize="12" FontWeight="SemiBold" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Grid.Row="2" Grid.Column="0" Margin="0,0,7,0" Style="{StaticResource MediaTileStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding RecentTrackCountText}" Style="{StaticResource TinyLabelTextStyle}" Foreground="#FFF9D6" />
+                                                    <controls:AutoFitTextBlock Text="Recent items" Foreground="{StaticResource TextPrimaryBrush}" FontSize="20" MaxFontSize="20" MinFontSize="12" FontWeight="SemiBold" />
+                                                </StackPanel>
+                                            </Border>
+                                            <Border Grid.Row="2" Grid.Column="1" Margin="7,0,0,0" Style="{StaticResource MediaTileStyle}">
+                                                <StackPanel>
+                                                    <TextBlock Text="LOCAL" Style="{StaticResource TinyLabelTextStyle}" Foreground="#DFFFF8" />
+                                                    <controls:AutoFitTextBlock Text="On-device library" Foreground="{StaticResource TextPrimaryBrush}" FontSize="20" MaxFontSize="20" MinFontSize="12" FontWeight="SemiBold" />
+                                                </StackPanel>
+                                            </Border>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
+
+                                <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Margin="0,20,0,0">
+                                    <TextBlock Text="Featured shelves" Style="{StaticResource SectionTitleTextStyle}" />
+                                    <UniformGrid Columns="5" Margin="-8,12,-8,0">
+                                        <Border Style="{StaticResource MediaTileStyle}" Margin="8">
+                                            <StackPanel>
+                                                <Border Height="104" CornerRadius="18">
+                                                    <Border.Background>
+                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                            <GradientStop Color="#F7FFF3" Offset="0" />
+                                                            <GradientStop Color="#57E2A1" Offset="0.48" />
+                                                            <GradientStop Color="#151C19" Offset="1" />
+                                                        </LinearGradientBrush>
+                                                    </Border.Background>
+                                                </Border>
+                                                <TextBlock Text="Morning Glass" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" Margin="0,12,0,0" />
+                                                <TextBlock Text="Smart shelf" Style="{StaticResource MutedTextStyle}" />
+                                            </StackPanel>
+                                        </Border>
+                                        <Border Style="{StaticResource MediaTileStyle}" Margin="8">
+                                            <StackPanel>
+                                                <Border Height="104" CornerRadius="18">
+                                                    <Border.Background>
+                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                            <GradientStop Color="#FFFAE2" Offset="0" />
+                                                            <GradientStop Color="#FA7C6E" Offset="0.5" />
+                                                            <GradientStop Color="#171216" Offset="1" />
+                                                        </LinearGradientBrush>
+                                                    </Border.Background>
+                                                </Border>
+                                                <TextBlock Text="Heatwave FM" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" Margin="0,12,0,0" />
+                                                <TextBlock Text="Local mix" Style="{StaticResource MutedTextStyle}" />
+                                            </StackPanel>
+                                        </Border>
+                                        <Border Style="{StaticResource MediaTileStyle}" Margin="8">
+                                            <StackPanel>
+                                                <Border Height="104" CornerRadius="18">
+                                                    <Border.Background>
+                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                            <GradientStop Color="#FFFFFF" Offset="0" />
+                                                            <GradientStop Color="#8AA3FF" Offset="0.42" />
+                                                            <GradientStop Color="#16151F" Offset="1" />
+                                                        </LinearGradientBrush>
+                                                    </Border.Background>
+                                                </Border>
+                                                <TextBlock Text="Night Drive" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" Margin="0,12,0,0" />
+                                                <TextBlock Text="Playlist" Style="{StaticResource MutedTextStyle}" />
+                                            </StackPanel>
+                                        </Border>
+                                        <Border Style="{StaticResource MediaTileStyle}" Margin="8">
+                                            <StackPanel>
+                                                <Border Height="104" CornerRadius="18">
+                                                    <Border.Background>
+                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                            <GradientStop Color="#FDF5FF" Offset="0" />
+                                                            <GradientStop Color="#EF8ECC" Offset="0.48" />
+                                                            <GradientStop Color="#1B151A" Offset="1" />
+                                                        </LinearGradientBrush>
+                                                    </Border.Background>
+                                                </Border>
+                                                <TextBlock Text="Vocal Bloom" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" Margin="0,12,0,0" />
+                                                <TextBlock Text="Collection" Style="{StaticResource MutedTextStyle}" />
+                                            </StackPanel>
+                                        </Border>
+                                        <Border Style="{StaticResource MediaTileStyle}" Margin="8">
+                                            <StackPanel>
+                                                <Border Height="104" CornerRadius="18">
+                                                    <Border.Background>
+                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                            <GradientStop Color="#FFFFEA" Offset="0" />
+                                                            <GradientStop Color="#F4D45B" Offset="0.46" />
+                                                            <GradientStop Color="#161710" Offset="1" />
+                                                        </LinearGradientBrush>
+                                                    </Border.Background>
+                                                </Border>
+                                                <TextBlock Text="Analog Sun" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" Margin="0,12,0,0" />
+                                                <TextBlock Text="Folder" Style="{StaticResource MutedTextStyle}" />
+                                            </StackPanel>
+                                        </Border>
+                                    </UniformGrid>
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid x:Name="LibraryPage" Visibility="Collapsed">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <StackPanel>
+                                    <WrapPanel>
+                                        <Button Content="All media" Style="{StaticResource GlassButtonStyle}" Margin="0,0,8,8" />
+                                        <Button Content="Albums" Style="{StaticResource GlassButtonStyle}" Margin="0,0,8,8" />
+                                        <Button Content="Artists" Style="{StaticResource GlassButtonStyle}" Margin="0,0,8,8" />
+                                        <Button Content="Folders" Style="{StaticResource GlassButtonStyle}" Margin="0,0,8,8" />
+                                        <Button Content="Lossless" Style="{StaticResource GlassButtonStyle}" Margin="0,0,8,8" />
+                                    </WrapPanel>
+                                    <TextBlock Text="{Binding ImportStatus}" Style="{StaticResource MutedTextStyle}" Margin="2,4,0,0" />
+                                </StackPanel>
+
+                                <Border Grid.Row="1" Style="{StaticResource LiquidSurfaceStyle}" Padding="18" Margin="0,16,0,0">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="42" />
+                                            <RowDefinition Height="1" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2.2*" />
+                                                <ColumnDefinition Width="1.4*" />
+                                                <ColumnDefinition Width="1.1*" />
+                                                <ColumnDefinition Width="0.8*" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="Title" Style="{StaticResource TinyLabelTextStyle}" VerticalAlignment="Center" />
+                                            <TextBlock Grid.Column="1" Text="Artist" Style="{StaticResource TinyLabelTextStyle}" VerticalAlignment="Center" />
+                                            <TextBlock Grid.Column="2" Text="Album" Style="{StaticResource TinyLabelTextStyle}" VerticalAlignment="Center" />
+                                            <TextBlock Grid.Column="3" Text="Format" Style="{StaticResource TinyLabelTextStyle}" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                                        </Grid>
+                                        <Rectangle Grid.Row="1" Fill="#26FFFFFF" />
+                                        <Grid Grid.Row="2">
+                                            <Border Style="{StaticResource MediaTileStyle}"
+                                                    Visibility="{Binding LibraryEmptyVisibility}"
+                                                    HorizontalAlignment="Stretch"
+                                                    VerticalAlignment="Top"
+                                                    Margin="0,18,0,0">
+                                                <StackPanel>
+                                                    <TextBlock Text="No imported music yet" Style="{StaticResource SectionTitleTextStyle}" />
+                                                    <TextBlock Text="Use Import for individual audio files, or Scan to add everything from a folder." Style="{StaticResource MutedTextStyle}" Margin="0,6,0,0" />
+                                                </StackPanel>
+                                            </Border>
+
+                                            <ScrollViewer Visibility="{Binding TrackListVisibility}"
+                                                          VerticalScrollBarVisibility="Auto"
+                                                          HorizontalScrollBarVisibility="Disabled">
+                                                <ItemsControl ItemsSource="{Binding FilteredTracks}">
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Border Style="{StaticResource MediaTileStyle}" Margin="0,6,0,6" Padding="12">
+                                                                <Grid MinHeight="58" ToolTip="{Binding FilePath}">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="2.2*" />
+                                                                        <ColumnDefinition Width="1.4*" />
+                                                                        <ColumnDefinition Width="1.1*" />
+                                                                        <ColumnDefinition Width="0.8*" />
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <StackPanel VerticalAlignment="Center">
+                                                                        <controls:AutoFitTextBlock Text="{Binding Title}" Foreground="{StaticResource TextPrimaryBrush}" FontSize="14" MaxFontSize="14" MinFontSize="10" FontWeight="SemiBold" />
+                                                                        <TextBlock Text="{Binding SizeLabel}" Style="{StaticResource TinyLabelTextStyle}" Margin="0,4,0,0" />
+                                                                    </StackPanel>
+                                                                    <controls:AutoFitTextBlock Grid.Column="1" Text="{Binding Artist}" Style="{StaticResource MutedTextStyle}" MaxFontSize="13" MinFontSize="10" VerticalAlignment="Center" />
+                                                                    <controls:AutoFitTextBlock Grid.Column="2" Text="{Binding Album}" Style="{StaticResource MutedTextStyle}" MaxFontSize="13" MinFontSize="10" VerticalAlignment="Center" />
+                                                                    <TextBlock Grid.Column="3" Text="{Binding Format}" Style="{StaticResource TinyLabelTextStyle}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                                                </Grid>
+                                                            </Border>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </ScrollViewer>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+
+                            <Grid x:Name="RecentsPage" Visibility="Collapsed">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="18" />
+                                    <ColumnDefinition Width="340" />
+                                </Grid.ColumnDefinitions>
+                                <Border Style="{StaticResource LiquidSurfaceStyle}" Padding="20">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="Recently touched" Style="{StaticResource SectionTitleTextStyle}" />
+                                        <Border Grid.Row="1"
+                                                Style="{StaticResource MediaTileStyle}"
+                                                Visibility="{Binding RecentEmptyVisibility}"
+                                                Margin="0,18,0,0"
+                                                VerticalAlignment="Top">
+                                            <StackPanel>
+                                                <TextBlock Text="Nothing recent yet" Style="{StaticResource SectionTitleTextStyle}" />
+                                                <TextBlock Text="Imported tracks will appear here first so the app feels alive immediately." Style="{StaticResource MutedTextStyle}" Margin="0,6,0,0" />
+                                            </StackPanel>
+                                        </Border>
+                                        <ScrollViewer Grid.Row="1"
+                                                      Visibility="{Binding RecentListVisibility}"
+                                                      VerticalScrollBarVisibility="Auto"
+                                                      HorizontalScrollBarVisibility="Disabled"
+                                                      Margin="0,12,0,0">
+                                            <ItemsControl ItemsSource="{Binding RecentTracks}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border Style="{StaticResource MediaTileStyle}" Margin="0,6,0,6">
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="72" />
+                                                                    <ColumnDefinition Width="*" />
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                </Grid.ColumnDefinitions>
+                                                                <Border Width="56" Height="56" CornerRadius="16">
+                                                                    <Border.Background>
+                                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                                            <GradientStop Color="#FFFFFF" Offset="0" />
+                                                                            <GradientStop Color="#76F3D0" Offset="0.45" />
+                                                                            <GradientStop Color="#111B18" Offset="1" />
+                                                                        </LinearGradientBrush>
+                                                                    </Border.Background>
+                                                                    <TextBlock Text="{Binding Initials}" Foreground="#111717" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                </Border>
+                                                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                                    <controls:AutoFitTextBlock Text="{Binding Title}" Foreground="{StaticResource TextPrimaryBrush}" FontSize="14" MaxFontSize="14" MinFontSize="10" FontWeight="SemiBold" />
+                                                                    <TextBlock Text="{Binding Artist}" Style="{StaticResource MutedTextStyle}" />
+                                                                </StackPanel>
+                                                                <TextBlock Grid.Column="2" Text="{Binding ImportedLabel}" Style="{StaticResource TinyLabelTextStyle}" VerticalAlignment="Center" />
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </ScrollViewer>
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Column="2" Style="{StaticResource LiquidSurfaceStyle}" Padding="22">
+                                    <StackPanel>
+                                        <TextBlock Text="Session glass" Style="{StaticResource SectionTitleTextStyle}" />
+                                        <TextBlock Text="{Binding ImportStatus}" Style="{StaticResource MutedTextStyle}" TextWrapping="Wrap" Margin="0,8,0,20" />
+                                        <TextBlock Text="Listening arc" Style="{StaticResource TinyLabelTextStyle}" />
+                                        <Slider Value="72" Style="{StaticResource LiquidSliderStyle}" Margin="0,8,0,18" />
+                                        <TextBlock Text="Library freshness" Style="{StaticResource TinyLabelTextStyle}" />
+                                        <Slider Value="44" Style="{StaticResource LiquidSliderStyle}" Margin="0,8,0,18" />
+                                        <TextBlock Text="Queue restore" Style="{StaticResource TinyLabelTextStyle}" />
+                                        <Slider Value="88" Style="{StaticResource LiquidSliderStyle}" Margin="0,8,0,0" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+
+                            <ScrollViewer x:Name="SettingsPage"
+                                          Visibility="Collapsed"
+                                          VerticalScrollBarVisibility="Auto">
+                                <StackPanel>
+                                    <Border Style="{StaticResource LiquidSurfaceStyle}" Padding="22">
+                                        <StackPanel>
+                                            <TextBlock Text="Appearance" Style="{StaticResource SectionTitleTextStyle}" />
+                                            <Grid Margin="0,20,0,0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="220" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel>
+                                                    <TextBlock Text="Glass intensity" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" />
+                                                    <TextBlock Text="Controls how much the content color bends into surfaces." Style="{StaticResource MutedTextStyle}" Margin="0,4,0,0" />
+                                                </StackPanel>
+                                                <Slider Grid.Column="1" Value="78" Style="{StaticResource LiquidSliderStyle}" VerticalAlignment="Center" />
+                                            </Grid>
+                                            <Grid Margin="0,18,0,0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="220" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel>
+                                                    <TextBlock Text="Edge lensing" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" />
+                                                    <TextBlock Text="Adds brighter rim highlights to panels and sliders." Style="{StaticResource MutedTextStyle}" Margin="0,4,0,0" />
+                                                </StackPanel>
+                                                <Slider Grid.Column="1" Value="62" Style="{StaticResource LiquidSliderStyle}" VerticalAlignment="Center" />
+                                            </Grid>
+                                            <Grid Margin="0,18,0,0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="90" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel>
+                                                    <TextBlock Text="Responsive glow" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" />
+                                                    <TextBlock Text="Surfaces brighten as they are hovered or selected." Style="{StaticResource MutedTextStyle}" Margin="0,4,0,0" />
+                                                </StackPanel>
+                                                <CheckBox Grid.Column="1" IsChecked="True" Style="{StaticResource GlassSwitchStyle}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                            </Grid>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Style="{StaticResource LiquidSurfaceStyle}" Padding="22" Margin="0,16,0,0">
+                                        <StackPanel>
+                                            <TextBlock Text="Media foundation" Style="{StaticResource SectionTitleTextStyle}" />
+                                            <Grid Margin="0,20,0,0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="90" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel>
+                                                    <TextBlock Text="Watch local folders" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" />
+                                                    <TextBlock Text="Reserved for automatic indexing in the next build." Style="{StaticResource MutedTextStyle}" Margin="0,4,0,0" />
+                                                </StackPanel>
+                                                <CheckBox Grid.Column="1" IsChecked="True" Style="{StaticResource GlassSwitchStyle}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                            </Grid>
+                                            <Grid Margin="0,18,0,0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="90" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel>
+                                                    <TextBlock Text="Remember window state" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" />
+                                                    <TextBlock Text="Keeps size, page, and playback surface ready for persistence." Style="{StaticResource MutedTextStyle}" Margin="0,4,0,0" />
+                                                </StackPanel>
+                                                <CheckBox Grid.Column="1" Style="{StaticResource GlassSwitchStyle}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                            </Grid>
+                                            <Grid Margin="0,18,0,0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="220" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel>
+                                                    <TextBlock Text="Crossfade preview" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" />
+                                                    <TextBlock Text="A design placeholder for future playback engine timing." Style="{StaticResource MutedTextStyle}" Margin="0,4,0,0" />
+                                                </StackPanel>
+                                                <Slider Grid.Column="1" Value="28" Style="{StaticResource LiquidSliderStyle}" VerticalAlignment="Center" />
+                                            </Grid>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

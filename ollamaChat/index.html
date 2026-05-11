@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Local Ollama Chat + Website Builder</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Markdown renderer -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+body{font-family:Arial,sans-serif;margin:0;padding:0;background:#f4f4f4}
+#app{max-width:800px;margin:0 auto;padding:1rem;background:#fff;height:100vh;display:flex;flex-direction:column}
+#chat{flex:1 1 auto;overflow-y:auto;padding:0.5rem;border:1px solid #ddd;border-radius:4px;background:#fafafa}
+.message{margin:0.5rem 0;padding:0.5rem;border-radius:4px;max-width:80%}
+.message.user{align-self:flex-end;background:#e0f7fa;color:#006064}
+.message.assistant{align-self:flex-start;background:#eceff1;color:#37474f}
+.message .meta{font-size:0.8em;color:#888}
+pre{background:#212121;color:#f8f8f2;padding:1rem;border-radius:4px;overflow:auto}
+button{cursor:pointer}
+#inputArea{display:flex;margin-top:0.5rem}
+#inputArea textarea{flex:1;resize:none;padding:0.5rem;border:1px solid #ddd;border-radius:4px;font-family:inherit}
+#inputArea button{margin-left:0.5rem;padding:0.5rem
+1rem;border:none;background:#00796b;color:#fff;border-radius:4px}
+#settings{position:fixed;top:0;right:0;background:#fff;border-left:1px solid #ddd;border-bottom:1px solid
+#ddd;padding:1rem;z-index:10}
+#settings h3{margin-top:0}
+#settings label{display:block;margin-top:0.5rem}
+#settings input{width:200px;padding:0.25rem;margin-top:0.25rem}
+#settings button{margin-top:0.5rem;padding:0.5rem
+1rem;background:#00796b;color:#fff;border:none;border-radius:4px}
+#header{display:flex;justify-content:space-between1rem;background:#00796b;color:#fff;border:none;border-radius:4px}#header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+#header h1{font-size:1.5rem;margin:0}
+#header button{background:#37474f;color:#fff;border:none;border-radius:4px;padding:0.5rem 1rem}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div id="header">
+    <h1>Local Ollama Chat</h1>
+    <div>
+      <button id="websiteBtn">Generate Website</button>
+      <button id="settingsBtn">⚙️</button>
+    </div>
+  </div>
+  <div id="chat"></div>
+
+  <div id="inputArea">
+    <textarea id="input" rows="2" placeholder="Type your message…"></textarea>
+    <button id="sendBtn">Send</button>
+  </div>
+</div>
+
+<div id="settings" style="display:none">
+  <h3>Personalization</h3>
+  <label>Name: <input type="text" id="userName" placeholder="Your name"></label>
+  <label>Role: <input type="text" id="userRole" placeholder="Your role"></label>
+  <button id="saveSettings">Save</button>
+</div>
+
+<script>
+(() => {
+  /* ---------- Config ---------- */
+  const ollamaURL = 'http://localhost:11434/v1/';
+  const model = 'qwen2.5-coder';          // change to your local model name
+  const systemPrompt = "You are a helpful assistant. Respond concisely.";
+  const storageKey = 'ollama_chat_state';
+
+  /* ---------- State ---------- */
+  const state = {
+    chatId: 'default',
+    messages: [],      // {role: 'user'|'assistant', content: ''}
+    userName: '',
+    userRole: ''
+  };
+
+  /* ---------- DOM ---------- */
+  const chatEl   = document.getElementById('chat');
+  const inputEl  = document.getElementById('input');
+  const sendBtn  = document.getElementById('sendBtn');
+  const settingsBtn = document.getElementById('settingsBtn');
+  const settingsEl = document.getElementById('settings');
+  const saveSettingsBtn = document.getElementById('saveSettings');
+  const websiteBtn = document.getElementById('websiteBtn');
+
+  /* ---------- Helpers ---------- */
+  function renderChat() {
+    chatEl.innerHTML = '';
+    state.messages.forEach((msg, idx) => {
+      const div = document.createElement('div');
+      div.className = 'message ' + (msg.role === 'assistant' ? 'assistant' : 'user');
+      div.innerHTML = `
+        <div class="meta">${msg.role === 'assistant' ? 'AI' : state.userName || 'You'} (${msg.role})</div>
+        ${marked.parse(msg.content)}
+      `;
+      chatEl.appendChild(div);
+    });
+    chatEl.scrollTop = chatEl.scrollHeight;
+  }
+
+  function saveState() {
+    localStorage.setItem(storageKey, JSON.stringify(state));
+  }
+
+  function loadState() {
+    const stored = localStorage.getItem(storageKey);
+    if (stored) {
+      const obj = JSON.parse(stored);
+      state.chatId   = obj.chatId   || state.chatId;
+      state.messages = obj.messages || state.messages;
+      state.userName = obj.userName || state.userName;
+      state.userRole = obj.userRole || state.userRole;
+    }
+  }
+
+  /* ---------- Stream handling ---------- */
+  async function streamResponse(messages) {
+    const payload = {
+      model,
+      messages,
+      stream: true
+    };
+    const response = await fetch(ollamaURL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      alert('Error: ' + response.statusText);
+      return;
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder('utf-8');
+    let assistantMsg = '';
+
+    // create a placeholder message element
+    state.messages.push({role: 'assistant', content: ''});
+    renderChat();
+
+    while (true) {
+      const {done, value} = await reader.read();
+      if (done) break;
+      const chunk = decoder.decode(value, {stream:true});
+      // Ollama streams JSON lines: {"content":"..."}
+      // but to keep it simple we just append raw text
+      assistantMsg += chunk;
+      state.messages[state.messages.length-1].content = assistantMsg;
+      renderChat();
+    }
+    saveState();
+  }
+
+  /* ---------- Send message ---------- */
+  async function sendMessage() {
+    const text = inputEl.value.trim();
+    if (!text) return;
+    inputEl.value = '';
+    state.messages.push({role: 'user', content: text});
+    renderChat();
+    saveState();
+
+    const allMsgs = [
+      {role: 'system', content: systemPrompt + (state.userRole ? `\nYour role is ${state.userRole}.` : '')},
+      ...state.messages
+    ];
+
+    await streamResponse(allMsgs);
+  }
+
+  /* ---------- Event Listeners ---------- */
+  sendBtn.addEventListener('click', sendMessage);
+  inputEl.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+  });
+
+  settingsBtn.addEventListener('click', () => {
+    settingsEl.style.display = 'block';
+    document.getElementById('userName').value = state.userName;
+    document.getElementById('userRole').value = state.userRole;
+  });
+
+  saveSettingsBtn.addEventListener('click', () => {
+    state.userName = document.getElementById('userName').value.trim();
+    state.userRole = document.getElementById('userRole').value.trim();
+    saveState();
+    settingsEl.style.display = 'none';
+  });
+
+  websiteBtn.addEventListener('click', async () => {
+    const topic = prompt('Enter a topic for the website:');
+    if (!topic) return;
+    const prompt = `Generate a complete static website about "${topic}". Provide full HTML, CSS, and JavaScript.
+Wrap each file in a separate code fence.`;
+    inputEl.value = prompt;
+    await sendMessage();
+  });
+
+  /* ---------- Init ---------- */
+  loadState();
+  renderChat();
+
+})();
+</script>
+</body>
+</html>

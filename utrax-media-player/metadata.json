@@ -1,0 +1,6 @@
+{
+  "name": "UTrax Media Player",
+  "description": "A futuristic local media player with an iOS 26 Liquid Glass aesthetic, featuring metadata parsing and auto-organized library.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

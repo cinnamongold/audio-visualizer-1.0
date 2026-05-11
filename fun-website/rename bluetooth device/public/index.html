@@ -1,0 +1,66 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bluetooth Rename Wizard</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="card">
+      <p class="eyebrow">Windows Wizard</p>
+      <h1>Rename a Bluetooth device</h1>
+      <p class="subtitle">Choose a recognized Bluetooth device, preview its details, then request a new Windows display name.</p>
+
+      <ol class="steps">
+        <li class="step active" data-step="1">Find device</li>
+        <li class="step" data-step="2">Pick name</li>
+        <li class="step" data-step="3">Finish</li>
+      </ol>
+
+      <section class="panel" id="step-1">
+        <div class="toolbar">
+          <button id="refreshBtn" type="button">Refresh devices</button>
+        </div>
+        <div id="loading" class="hint">Loading Bluetooth devices…</div>
+        <div id="deviceList" class="device-list"></div>
+      </section>
+
+      <section class="panel hidden" id="step-2">
+        <div class="selected-box">
+          <div>
+            <div class="label">Current device</div>
+            <div id="currentName" class="selected-name"></div>
+          </div>
+          <div>
+            <div class="label">Instance ID</div>
+            <code id="currentId" class="instance-id"></code>
+          </div>
+        </div>
+
+        <label class="field">
+          <span>New display name</span>
+          <input id="newName" type="text" maxlength="120" placeholder="My Headphones" />
+        </label>
+
+        <div class="actions">
+          <button id="backBtn" type="button" class="secondary">Back</button>
+          <button id="renameBtn" type="button">Rename device</button>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="step-3">
+        <div id="resultBox" class="result"></div>
+        <div class="actions">
+          <button id="startOverBtn" type="button" class="secondary">Rename another</button>
+        </div>
+      </section>
+
+      <p class="footnote">Note: Windows may require Administrator rights to change the device label, and some Bluetooth devices do not expose a renameable friendly name through Windows.</p>
+    </section>
+  </main>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

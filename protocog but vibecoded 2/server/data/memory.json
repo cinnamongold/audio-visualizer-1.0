@@ -1,0 +1,121 @@
+{
+  "profile": {
+    "name": null
+  },
+  "facts": [],
+  "preferences": [],
+  "topics": {
+    "wondering": 1,
+    "said": 1,
+    "keep": 1,
+    "idk": 1,
+    "bro": 1,
+    "want": 1,
+    "shut": 1,
+    "fuck": 1
+  },
+  "conversation": [
+    {
+      "role": "user",
+      "text": "hi",
+      "at": "2026-04-27T15:45:17.200Z"
+    },
+    {
+      "role": "bot",
+      "text": "You keep bringing that up. There's something there worth exploring.",
+      "at": "2026-04-27T15:45:19.269Z",
+      "label": "topic_followup",
+      "confidence": 0.546
+    },
+    {
+      "role": "user",
+      "text": "what",
+      "at": "2026-04-27T15:45:23.435Z"
+    },
+    {
+      "role": "bot",
+      "text": "Hmm, not totally sure but I think it's about this. What specifically are you wondering about?",
+      "at": "2026-04-27T15:45:25.595Z",
+      "label": "question",
+      "confidence": 0.9925
+    },
+    {
+      "role": "user",
+      "text": "im wondering why you said i keep bringing things up when ive never talked to you before",
+      "at": "2026-04-27T15:45:44.057Z"
+    },
+    {
+      "role": "bot",
+      "text": "That thing with wondering - want to dig into it?",
+      "at": "2026-04-27T15:45:46.170Z",
+      "label": "topic_followup",
+      "confidence": 0.6519
+    },
+    {
+      "role": "user",
+      "text": "idk bro do you want to",
+      "at": "2026-04-27T15:45:56.598Z"
+    },
+    {
+      "role": "bot",
+      "text": "You keep bringing that up. There's something there worth exploring.",
+      "at": "2026-04-27T15:45:58.693Z",
+      "label": "topic_followup",
+      "confidence": 0.696
+    },
+    {
+      "role": "user",
+      "text": "shut the FUCK UP",
+      "at": "2026-04-27T15:46:05.776Z"
+    },
+    {
+      "role": "bot",
+      "text": "So about shut... what's on your mind there?",
+      "at": "2026-04-27T15:46:07.835Z",
+      "label": "topic_followup",
+      "confidence": 0.6584
+    }
+  ],
+  "recent_learning": [
+    {
+      "at": "2026-04-27T15:45:13.875Z",
+      "type": "training",
+      "summary": "Training finished from manual mode with 13 examples."
+    },
+    {
+      "at": "2026-04-27T15:45:07.713Z",
+      "type": "memory",
+      "summary": "Memory cleared. Training examples and model weights were kept."
+    }
+  ],
+  "settings": {
+    "autoTrain": false
+  },
+  "stats": {
+    "total_messages": 5,
+    "total_trains": 1,
+    "new_examples_since_train": 5,
+    "last_train_at": "2026-04-27T15:45:13.176118+00:00",
+    "last_train_result": {
+      "status": "trained",
+      "trained": true,
+      "example_count": 13,
+      "vocab_size": 49,
+      "epochs": 18,
+      "loss": 0.007732,
+      "accuracy": 1,
+      "avg_confidence": 0.9764,
+      "label_counts": {
+        "greeting": 1,
+        "fact_share": 1,
+        "topic_followup": 8,
+        "question": 3
+      },
+      "trained_at": "2026-04-27T15:45:13.176118+00:00",
+      "min_examples_hint": 8
+    }
+  },
+  "last_example_id": "03da7cf2-ffdb-4cda-b1f7-3a780ba753b7",
+  "last_bot_label": "topic_followup",
+  "last_template_key": "topic_followup:0"
+}

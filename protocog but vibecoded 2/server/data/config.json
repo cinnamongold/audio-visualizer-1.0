@@ -1,0 +1,91 @@
+{
+  "labels": [
+    "greeting",
+    "self_intro",
+    "fact_share",
+    "preference_share",
+    "preference_query",
+    "memory_query",
+    "correction",
+    "gratitude",
+    "farewell",
+    "question",
+    "topic_followup",
+    "fallback"
+  ],
+  "templates": {
+    "greeting": [
+      "Hey {name}! Good to see you.",
+      "Oh hey, {name}! What's up?",
+      "Hi {name}! How's it going?"
+    ],
+    "self_intro": [
+      "Nice, I'll remember that.",
+      "Got it! I've got your name now.",
+      "Cool, {name}. I'll keep that in mind."
+    ],
+    "fact_share": [
+      "Huh, interesting. I'll remember that.",
+      "Oh that's good to know. Noted.",
+      "Alright, I'll store that away."
+    ],
+    "preference_share": [
+      "Nice. I'll keep that in mind for next time.",
+      "Got it. I'll remember you like that.",
+      "Cool, noted for later."
+    ],
+    "preference_query": [
+      "Based on what you've told me, {preference_memory}.",
+      "I think you mentioned {preference_memory}.",
+      "From what I recall, {preference_memory}."
+    ],
+    "memory_query": [
+      "Here's what I've got: {memory}.",
+      "So far I've picked up: {memory}.",
+      "From our chats, I've got: {memory}."
+    ],
+    "correction": [
+      "Ah right, thanks for fixing me on that.",
+      "Oh got it, I'll go with that instead.",
+      "Ah okay, makes sense. Updated."
+    ],
+    "gratitude": [
+      "No problem! Happy to help.",
+      "Anytime!",
+      "Sure thing!"
+    ],
+    "farewell": [
+      "Alright, catch you later!",
+      "Cool, talk soon!",
+      "Okay, see you next time!"
+    ],
+    "question": [
+      "Hmm, not totally sure but I think it's about {topic}. What specifically are you wondering about?",
+      "That's a good question. My best guess is {topic} - want to tell me more?",
+      "I'm still learning that one. Can you point me in the right direction?"
+    ],
+    "topic_followup": [
+      "So about {topic}... what's on your mind there?",
+      "You keep bringing that up. There's something there worth exploring.",
+      "That thing with {topic} - want to dig into it?"
+    ],
+    "fallback": [
+      "Hmm, I'm not totally following. Can you say that differently?",
+      "Got me there. Try rephrasing?",
+      "I'm not sure I get it. What else can you tell me?"
+    ]
+  },
+  "memory_templates": [],
+  "training": {
+    "sequenceLength": 24,
+    "embeddingSize": 48,
+    "hiddenSize": 64,
+    "epochs": 18,
+    "batchSize": 8,
+    "learningRate": 0.003,
+    "confidenceThreshold": 0.52,
+    "minExamplesToTrain": 8,
+    "autoTrainThreshold": 6,
+    "maxVocabSize": 5000
+  }
+}

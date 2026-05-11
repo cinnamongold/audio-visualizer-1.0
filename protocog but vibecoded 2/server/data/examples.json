@@ -1,0 +1,275 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "0c771c08-2372-4014-8792-9ae8c83e26a6",
+      "text": "hello",
+      "label": "greeting",
+      "weight": 1.08,
+      "preferred": false,
+      "source": "conversation",
+      "created_at": "2026-04-27T15:27:15.115Z",
+      "metadata": {
+        "heuristicLabel": "greeting",
+        "predictedLabel": "fallback",
+        "predictedConfidence": 0,
+        "trained": false
+      }
+    },
+    {
+      "id": "a8a4d2e4-5dcd-44be-9cd8-fa664afebcdb",
+      "text": "i am nico",
+      "label": "fact_share",
+      "weight": 1.08,
+      "preferred": false,
+      "source": "conversation",
+      "created_at": "2026-04-27T15:27:25.524Z",
+      "metadata": {
+        "heuristicLabel": "fact_share",
+        "predictedLabel": "fallback",
+        "predictedConfidence": 0,
+        "trained": false
+      }
+    },
+    {
+      "id": "523fcb8c-f3e7-44fc-8c91-97345817f1a9",
+      "text": "well, nico is my name",
+      "label": "topic_followup",
+      "weight": 1.08,
+      "preferred": false,
+      "source": "conversation",
+      "created_at": "2026-04-27T15:27:37.150Z",
+      "metadata": {
+        "heuristicLabel": "topic_followup",
+        "predictedLabel": "fallback",
+        "predictedConfidence": 0,
+        "trained": false
+      }
+    },
+    {
+      "id": "459dc3a7-aa3e-4616-b5b5-b86111de31ee",
+      "text": "i mention nico a lot because thats who i am, would you like a name?",
+      "label": "question",
+      "weight": 1.4300000000000002,
+      "preferred": true,
+      "source": "conversation",
+      "created_at": "2026-04-27T15:28:12.854Z",
+      "metadata": {
+        "heuristicLabel": "question",
+        "predictedLabel": "fallback",
+        "predictedConfidence": 0,
+        "trained": false
+      }
+    },
+    {
+      "id": "2deb5785-810c-4d5f-817e-303382b854c2",
+      "text": "yeah uhh the weather is nice rn (right now)",
+      "label": "topic_followup",
+      "weight": 1.08,
+      "preferred": false,
+      "source": "conversation",
+      "created_at": "2026-04-27T15:28:43.643Z",
+      "metadata": {
+        "heuristicLabel": "topic_followup",
+        "predictedLabel": "fallback",
+        "predictedConfidence": 0,
+        "trained": false
+      }
+    },
+    {
+      "id": "fe072a02-0a21-4207-9c97-fe71b245bb20",
+      "text": "whats a fun fact you know",
+      "label": "topic_followup",
+      "weight": 1.08,
+      "preferred": false,
+      "source": "conversation",
+      "created_at": "2026-04-27T15:29:14.127Z",
+      "metadata": {
+        "heuristicLabel": "topic_followup",
+        "predictedLabel": "fallback",
+        "predictedConfidence": 0,
+        "trained": false
+      }
+    },
+    {
+      "id": "2e99a270-39f9-4f7d-8774-547261e0e977",
+      "text": "whys this frame getting so big",
+      "label": "topic_followup",
+      "weight": 1.08,
+      "preferred": false,
+      "source": "conversation",
+      "created_at": "2026-04-27T15:29:41.286Z",
+      "metadata": {
+        "heuristicLabel": "topic_followup",
+        "predictedLabel": "topic_followup",
+        "predictedConfidence": 0.2927,
+        "trained": true
+      }
+    },
+    {
+      "id": "463953d5-fba4-40d3-b6b0-2dad7696e1bb",
+      "text": "what",
+      "label": "question",
+      "weight": 1.08,
+      "preferred": false,
+      "source": "conversation",
+      "created_at": "2026-04-27T15:37:33.191Z",
+      "metadata": {
+        "heuristicLabel": "question",
+        "predictedLabel": "topic_followup",
+        "predictedConfidence": 0.2927,
+        "trained": true
+      }
+    },
+    {
+      "id": "628a8c87-3e22-4fc7-b54e-e693d7f40444",
+      "text": "because thats my name dudeee",
+      "label": "topic_followup",
+      "weight": 1.08,
+      "preferred": false,
+      "source": "conversation",
+      "created_at": "2026-04-27T15:37:44.931Z",
+      "metadata": {
+        "heuristicLabel": "topic_followup",
+        "predictedLabel": "topic_followup",
+        "predictedConfidence": 0.4834,
+        "trained": true
+      }
+    },
+    {
+      "id": "ae35eccc-00b3-4309-842b-9b3c3afad294",
+      "text": "would you rather talk about something else",
+      "label": "topic_followup",
+      "weight": 1,
+      "preferred": false,
+      "source": "conversation",
+      "created_at": "2026-04-27T15:37:59.463Z",
+      "metadata": {
+        "heuristicLabel": "question",
+        "predictedLabel": "topic_followup",
+        "predictedConfidence": 0.3606,
+        "trained": true
+      }
+    },
+    {
+      "id": "1c9f8cc9-4165-4632-8365-a957748aefc8",
+      "text": "?",
+      "label": "question",
+      "weight": 1.08,
+      "preferred": false,
+      "source": "conversation",
+      "created_at": "2026-04-27T15:38:17.694Z",
+      "metadata": {
+        "heuristicLabel": "question",
+        "predictedLabel": "topic_followup",
+        "predictedConfidence": 0.2927,
+        "trained": true
+      }
+    },
+    {
+      "id": "375fb72f-6ece-4e1f-b574-47720bdb90b3",
+      "text": "nico is a human being who is talking to you right now",
+      "label": "topic_followup",
+      "weight": 1.08,
+      "preferred": false,
+      "source": "conversation",
+      "created_at": "2026-04-27T15:38:33.856Z",
+      "metadata": {
+        "heuristicLabel": "topic_followup",
+        "predictedLabel": "topic_followup",
+        "predictedConfidence": 0.4511,
+        "trained": true
+      }
+    },
+    {
+      "id": "bf6c3379-4d7d-4897-b6d8-57969ad293a2",
+      "text": "hiello",
+      "label": "topic_followup",
+      "weight": 1.08,
+      "preferred": false,
+      "source": "conversation",
+      "created_at": "2026-04-27T15:38:51.566Z",
+      "metadata": {
+        "heuristicLabel": "topic_followup",
+        "predictedLabel": "topic_followup",
+        "predictedConfidence": 0.2861,
+        "trained": true
+      }
+    },
+    {
+      "id": "0126ccfa-2433-454c-87e6-17231beac0f1",
+      "text": "hi",
+      "label": "topic_followup",
+      "weight": 1,
+      "preferred": false,
+      "source": "conversation",
+      "created_at": "2026-04-27T15:45:19.269Z",
+      "metadata": {
+        "heuristicLabel": "greeting",
+        "predictedLabel": "topic_followup",
+        "predictedConfidence": 0.546,
+        "trained": true
+      }
+    },
+    {
+      "id": "ffa30344-cc41-4b4c-a6e8-2310003a4d61",
+      "text": "what",
+      "label": "question",
+      "weight": 1.2000000000000002,
+      "preferred": true,
+      "source": "conversation",
+      "created_at": "2026-04-27T15:45:25.595Z",
+      "metadata": {
+        "heuristicLabel": "question",
+        "predictedLabel": "question",
+        "predictedConfidence": 0.9925,
+        "trained": true
+      }
+    },
+    {
+      "id": "02e8f372-52e9-41c3-aeca-b03cc6d8f968",
+      "text": "im wondering why you said i keep bringing things up when ive never talked to you before",
+      "label": "topic_followup",
+      "weight": 1.08,
+      "preferred": false,
+      "source": "conversation",
+      "created_at": "2026-04-27T15:45:46.170Z",
+      "metadata": {
+        "heuristicLabel": "topic_followup",
+        "predictedLabel": "topic_followup",
+        "predictedConfidence": 0.6519,
+        "trained": true
+      }
+    },
+    {
+      "id": "dca94311-08a9-4c33-91e2-e876c801b25b",
+      "text": "idk bro do you want to",
+      "label": "topic_followup",
+      "weight": 1.2000000000000002,
+      "preferred": false,
+      "source": "conversation",
+      "created_at": "2026-04-27T15:45:58.693Z",
+      "metadata": {
+        "heuristicLabel": "topic_followup",
+        "predictedLabel": "topic_followup",
+        "predictedConfidence": 0.696,
+        "trained": true
+      }
+    },
+    {
+      "id": "03da7cf2-ffdb-4cda-b1f7-3a780ba753b7",
+      "text": "shut the FUCK UP",
+      "label": "topic_followup",
+      "weight": 1.08,
+      "preferred": false,
+      "source": "conversation",
+      "created_at": "2026-04-27T15:46:07.835Z",
+      "metadata": {
+        "heuristicLabel": "topic_followup",
+        "predictedLabel": "topic_followup",
+        "predictedConfidence": 0.6584,
+        "trained": true
+      }
+    }
+  ]
+}
