@@ -24,10 +24,10 @@ export default function Sidebar({ route, onNavigate }: SidebarProps) {
 
   useEffect(() => {
     const isStandard = navItems.some(item => item.id === route.id);
-    
+
     setEphemeralPages(prev => {
       let next = [...prev];
-      
+
       // Increment switch count for all existing
       next = next.map(p => {
         // If this page is currently active, reset its counter
@@ -36,7 +36,7 @@ export default function Sidebar({ route, onNavigate }: SidebarProps) {
         }
         return { ...p, switchCount: p.switchCount + 1 };
       });
-      
+
       // Filter out those with switchCount > 2
       next = next.filter(p => p.switchCount <= 2);
 
@@ -68,6 +68,7 @@ export default function Sidebar({ route, onNavigate }: SidebarProps) {
       }
       case 'create-playlist': return 'Create Playlist';
       case 'download': return 'Download Music';
+      case 'queue': return 'Queue';
       default: return 'Page';
     }
   };
@@ -88,7 +89,7 @@ export default function Sidebar({ route, onNavigate }: SidebarProps) {
       <div className="mb-8 px-2 group cursor-pointer transition-transform hover:scale-105 active:scale-95 shrink-0" onClick={() => onNavigate('home')}>
         <Logo />
       </div>
-      
+
       <nav className="flex flex-col gap-2 shrink-0">
         {navItems.map((item) => {
           const isActive = route.id === item.id;
@@ -99,8 +100,8 @@ export default function Sidebar({ route, onNavigate }: SidebarProps) {
               onClick={() => onNavigate(item.id)}
               className={`
                 flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 group
-                ${isActive 
-                  ? 'bg-white/10 border border-white/10 shadow-inner text-white' 
+                ${isActive
+                  ? 'bg-white/10 border border-white/10 shadow-inner text-white'
                   : 'hover:bg-white/5 text-white/40 hover:text-white'}
               `}
             >
@@ -113,7 +114,7 @@ export default function Sidebar({ route, onNavigate }: SidebarProps) {
       </nav>
 
       {ephemeralPages.length > 0 && (
-        <div 
+        <div
           ref={scrollRef}
           className="mt-4 pt-4 border-t border-white/10 flex-1 overflow-y-auto custom-scrollbar flex flex-col gap-1.5 -mr-2 pr-2"
         >
@@ -126,8 +127,8 @@ export default function Sidebar({ route, onNavigate }: SidebarProps) {
                 onClick={() => onNavigate(ephemeral.state.id, ephemeral.state.params)}
                 className={`
                   flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-300 group shrink-0
-                  ${isActive 
-                    ? 'bg-white/10 border border-white/10 shadow-inner text-white' 
+                  ${isActive
+                    ? 'bg-white/10 border border-white/10 shadow-inner text-white'
                     : 'hover:bg-white/5 text-white/40 hover:text-white'}
                 `}
               >

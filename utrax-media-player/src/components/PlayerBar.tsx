@@ -4,7 +4,7 @@ import { usePlayer } from '../context/PlayerContext';
 import { PageId } from '../types';
 
 export default function PlayerBar({ onNavigate }: { onNavigate: (id: PageId, params?: any) => void }) {
-  const { currentTrack, isPlaying, setIsPlaying, playNext, playPrevious, audioRef, settings } = usePlayer();
+  const { currentTrack, isPlaying, setIsPlaying, playNext, playPrevious, audioRef, settings, isShuffle, toggleShuffle } = usePlayer();
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
 

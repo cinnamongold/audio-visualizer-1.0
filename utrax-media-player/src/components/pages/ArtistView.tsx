@@ -32,7 +32,7 @@ export default function ArtistView({ artistName, onNavigate }: { artistName: str
     }, {} as Record<string, any>);
   }, [artistTracks]);
 
-  const artistAlbums = useMemo(() => Object.values(artistAlbumsObj).sort((a, b) => b.year - a.year || a.title.localeCompare(b.title)), [artistAlbumsObj]);
+  const artistAlbums = useMemo(() => (Object.values(artistAlbumsObj) as any[]).sort((a, b) => b.year - a.year || a.title.localeCompare(b.title)), [artistAlbumsObj]);
 
   const coverUrl = artistAlbums.find(a => a.coverUrl)?.coverUrl;
 

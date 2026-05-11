@@ -49,7 +49,7 @@ export default function CreatePlaylistView({ onNavigate }: CreatePlaylistViewPro
         }
         return acc;
       }, {} as Record<string, any>);
-      const albumList = Object.values(albumsObj);
+      const albumList = Object.values(albumsObj) as any[];
       albumList.sort((a, b) => a.title.localeCompare(b.title));
       return { type: 'albums' as const, items: albumList };
     } else {

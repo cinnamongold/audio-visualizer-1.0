@@ -27,7 +27,7 @@ export default function Library({ onNavigate }: { onNavigate: (id: PageId, param
         }
         return acc;
       }, {} as Record<string, any>);
-      const albumList = Object.values(albumsObj);
+      const albumList = Object.values(albumsObj) as any[];
 
       switch (sortBy) {
         case 'name-asc': albumList.sort((a, b) => a.title.localeCompare(b.title)); break;
